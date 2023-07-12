@@ -1,0 +1,377 @@
+<!--
+  Copyright 2022 The Android Open Source Project
+  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+  in compliance with the License. You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software distributed under the License
+  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+  or implied. See the License for the specific language governing permissions and limitations under
+  the License.
+  -->
+<resources>
+    <string name="app_name">ComposeSampleDemo</string>
+
+    <!--Jetnew-->
+    <string name="load_error">Can\'t update latest news</string>
+    <string name="retry">Retry</string>
+    <string name="home_popular_section_title">Popular on Jetnews</string>
+    <string name="home_post_min_read">%1$s - %2$d min read</string>
+    <string name="cd_navigate_up">Navigate up</string>
+    <string name="cd_add_to_favorites">Add to favorites</string>
+    <string name="cd_share">Share</string>
+    <string name="cd_text_settings">Text settings</string>
+    <string name="cd_open_navigation_drawer">Open navigation drawer</string>
+    <string name="cd_show_fewer">Show fewer like this</string>
+    <string name="cd_bookmark">Bookmark</string>
+    <string name="unbookmark">unbookmark</string>
+    <string name="bookmark">bookmark</string>
+    <string name="fewer_stories">Show fewer stories like this?</string>
+    <string name="fewer_stories_content">This feature is not yet implemented</string>
+    <string name="agree">AGREE</string>
+    <string name="action_read_article">read article</string>
+    <string name="state_not_subscribed">not subscribed</string>
+    <string name="state_subscribed">subscribed</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="top">Top Story</string>
+    <string name="popular">Popular</string>
+    <string name="read_time">%1$d min read</string>
+    <string name="app_title">Jetnews</string>
+
+    <!--reply-->
+    <string name="navigation_drawer">Navigation Drawer</string>
+    <string name="tab_inbox">Inbox</string>
+    <string name="tab_article">Articles</string>
+    <string name="tab_dm">Direct Messages</string>
+    <string name="tab_groups">Groups</string>
+    <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="search_replies">search replies</string>
+    <string name="reply">Reply</string>
+    <string name="reply_all">Reply All</string>
+
+    <!--Animation-->
+    <string name="home">Home</string>
+    <string name="work">Work</string>
+    <string name="weather">Weather</string>
+    <string name="temperature">18 ℃</string>
+    <string name="tasks">Tasks</string>
+    <string name="add_tasks">ADD TASKS</string>
+    <string-array name="tasks">
+        <item>Buy milk</item>
+        <item>Choose curtain</item>
+        <item>Plant rosemary</item>
+        <item>Finish the essay</item>
+        <item>Receive new packages</item>
+        <item>Take a photo</item>
+    </string-array>
+    <string name="topics">Topics</string>
+    <string-array name="topics">
+        <item>2 new packages arrived</item>
+        <item>DIY project recommendation</item>
+        <item>Festival next month</item>
+        <item>New flower seeds available</item>
+    </string-array>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="edit">EDIT</string>
+    <string name="edit_message">Edit feature is not supported</string>
+    <string name="refresh">Refresh</string>
+
+    <!-- rally-->
+    <string name="total">Total</string>
+    <string name="due">Due</string>
+    <string name="account_redacted">• • • • • </string>
+    <string name="accounts">Accounts</string>
+    <string name="bills">Bills</string>
+    <string name="see_all">SEE ALL</string>
+
+    <!--MySoothe-->
+    <string name="favorite_collections">Favorite Collections</string>
+    <string name="align_your_body">Align your body</string>
+    <string name="ab1_inversions">Inversions</string>
+    <string name="ab2_quick_yoga">Quick yoga</string>
+    <string name="ab3_stretching">Stretching</string>
+    <string name="ab4_tabata">Tabata</string>
+    <string name="ab5_hiit">HIIT</string>
+    <string name="ab6_pre_natal_yoga">Pre-natal yoga</string>
+    <string name="fc1_short_mantras">Short mantras</string>
+    <string name="fc2_nature_meditations">Nature meditations</string>
+    <string name="fc3_stress_and_anxiety">Stress and anxiety</string>
+    <string name="fc4_self_massage">Self massage</string>
+    <string name="fc5_overwhelmed">Overwhelmed</string>
+    <string name="fc6_nightly_wind_down">Nightly wind down</string>
+    <string name="cd_fab_start">start</string>
+    <string name="bottom_navigation_home">HOME</string>
+    <string name="bottom_navigation_profile">PROFILE</string>
+    <string name="placeholder_search">Search</string>
+
+    <string name="show_more">Show more</string>
+    <string name="show_less">Show less</string>
+
+    <string name="cd_menu">Menu</string>
+    <string name="cd_back">Back</string>
+    <string name="cd_loading">Loading</string>
+    <string name="cd_drawer">Open drawer</string>
+
+
+    <!--Jetsnack-->
+    <string name="label_back">Back</string>
+
+    <!-- Home Tabs -->
+    <string name="home_feed">Home</string>
+    <string name="home_search">Search</string>
+    <string name="home_cart">My Cart</string>
+    <string name="home_profile">Profile</string>
+
+    <!-- Home -->
+    <string name="label_filters">Filters</string>
+    <string name="label_select_delivery">Select delivery address</string>
+
+    <!-- Search -->
+    <string name="search_jetsnack">Search Jetsnack</string>
+    <string name="search_no_matches">No matches for “%1s”</string>
+    <string name="search_no_matches_retry">Try broadening your search</string>
+    <string name="search_count">%1d items</string>
+    <string name="label_add">Add to cart</string>
+    <string name="label_search">Perform search</string>
+
+    <!-- Snack Detail -->
+    <string name="detail_header">Details</string>
+    <string name="detail_placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempus, sem vitae convallis imperdiet, lectus nunc pharetra diam, ac rhoncus quam eros eu risus. Nulla pulvinar condimentum erat, pulvinar tempus turpis blandit ut. Etiam sed ipsum sed lacus eleifend hendrerit eu quis quam. Etiam ligula eros, finibus vestibulum tortor ac, ultrices accumsan dolor. Vivamus vel nisl a libero lobortis posuere. Aenean facilisis nibh vel ultrices bibendum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse ac est vitae lacus commodo efficitur at ut massa. Etiam vestibulum sit amet sapien sed varius. Aliquam non ipsum imperdiet, pulvinar enim nec, mollis risus. Fusce id tincidunt nisl.</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="ingredients_list">Vanilla, Almond Flour, Eggs, Butter, Cream, Sugar</string>
+    <string name="quantity">Qty</string>
+    <string name="add_to_cart">ADD TO CART</string>
+
+    <!-- Cart -->
+    <string name="cart_order_header">Order (%1s)</string>
+    <plurals name="cart_order_count">
+        <item quantity="one">%1d item</item>
+        <item quantity="other">%1d items</item>
+    </plurals>
+    <string name="cart_summary_header">Summary</string>
+    <string name="cart_subtotal_label">Subtotal</string>
+    <string name="cart_shipping_label">Shipping &amp; Handling</string>
+    <string name="cart_total_label">Total</string>
+    <string name="cart_checkout">Checkout</string>
+    <string name="cart_increase_error">There was an error and the quantity couldn\'t be increased. Please try again.</string>
+    <string name="cart_decrease_error">There was an error and the quantity couldn\'t be decreased. Please try again.</string>
+    <string name="label_remove">Remove item</string>
+
+    <!-- Quantity Selector -->
+    <string name="label_increase">Increase</string>
+    <string name="label_decrease">Decrease</string>
+    <string name="work_in_progress">This is currently work in progress</string>
+    <string name="grab_beverage">Grab a beverage and check back later!</string>
+    <string name="see_more">SEE MORE</string>
+    <string name="see_less">SEE LESS</string>
+    <string name="remove_item">Remove Item</string>
+    <string name="reset">Reset</string>
+    <string name="sort">Sort</string>
+    <string name="price">Price</string>
+    <string name="category">Category</string>
+    <string name="max_calories">Max Calories</string>
+    <string name="lifestyle">LifeStyle</string>
+    <string name="per_serving">per serving</string>
+    <string name="android_favorites">Android\'s Favorite (default)</string>
+    <string name="rating">Rating</string>
+    <string name="alphabetical">Alphabetical</string>
+    <string name="close">Close</string>
+
+
+    <!-- JetChat -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Composer</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="conversations">Conversations</string>
+    <string name="jumpBottom">Jump to bottom</string>
+    <string name="send">Send</string>
+    <string name="author_me">me</string>
+    <string name="now">8:30 PM</string>
+    <string name="members">%d members</string>
+    <string name="textfield_hint">Message #composers</string>
+    <string name="emojis_label">Emojis</string>
+    <string name="stickers_label">Stickers</string>
+
+    <string name="message">Message</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="profile_error">There was an error loading the profile</string>
+    <string name="bio">Bio</string>
+    <string name="display_name">Display name</string>
+    <string name="status">Status</string>
+    <string name="timezone">Timezone</string>
+    <string name="twitter">Twitter</string>
+    <string name="common_channels">Channels in common</string>
+    <string name="lorem">Lorem or Ipsum</string>
+
+    <!-- Accessibility descriptions -->
+
+    <string name="emoji_selector_desc">Emoji selector</string>
+    <string name="emoji_selector_bt_desc">Show Emoji selector</string>
+    <string name="dm_desc">Direct Message</string>
+    <string name="attach_photo_desc">Attach Photo</string>
+    <string name="map_selector_desc">Location selector</string>
+    <string name="videochat_desc">Start videochat</string>
+    <string name="textfield_desc">Text input</string>
+    <string name="not_available">Functionality currently not available</string>
+    <string name="not_available_subtitle">Grab a beverage and check back later!</string>
+    <string name="attached_image">Attached image</string>
+    <string name="info">Information</string>
+    <string name="more_options">More options</string>
+
+
+    <!-- Jetsurvey -->
+    <string name="app_tagline">Better surveys with Jetpack Compose</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_in_guest">Sign in as guest</string>
+    <string name="sign_in_create_account">Sign in or create an account</string>
+    <string name="or">or</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="user_continue">Continue</string>
+    <string name="create_account">Create account</string>
+    <string name="terms_and_conditions">By continuing, you agree to our Terms of Service. We’ll
+        handle your data according to our Privacy Policy.</string>
+    <string name="feature_not_available">Feature not available</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="done">Done</string>
+    <string name="back">Back</string>
+    <string name="show_password">Show password</string>
+    <string name="hide_password">Hide password</string>
+
+    <!-- survey-->
+    <string name="question_count">\u00A0of %d</string>
+    <string name="select_one">Select one.</string>
+    <string name="select_all">Select all that apply.</string>
+    <string name="select_date">Select date.</string>
+
+    <!-- question 1-->
+    <string name="in_my_free_time">In my free time I like to …</string>
+    <string name="read">Read</string>
+    <string name="work_out">Work out</string>
+    <string name="draw">Draw</string>
+    <string name="play_games">Play video games</string>
+    <string name="dance">Dance</string>
+    <string name="watch_movies">Watch movies</string>
+
+    <!-- question 2 -->
+    <string name="pick_superhero">Pick a Compose comic character</string>
+    <string name="spark">Spark</string>
+    <string name="lenz">Lenz</string>
+    <string name="bugchaos">Bug of Chaos</string>
+    <string name="frag">Frag</string>
+
+    <!-- question 3  -->
+    <string name="takeaway">When was the last time you ordered takeaway because you couldn\'t be bothered to cook?</string>
+
+    <!-- question 4-->
+    <string name="selfies">How do you feel about selfies 🤳?</string>
+
+    <!-- question 5-->
+    <string name="selfie_skills">Show off your selfie skills!</string>
+    <string name="add_photo">ADD PHOTO</string>
+    <string name="retake_photo">RETAKE PHOTO</string>
+
+    <string name="survey_result_title">Compose</string>
+    <string name="survey_result_subtitle">Congratulations, you are Compose</string>
+    <string name="survey_result_description">You are a curious developer, always willing to try
+        something new. You want to stay up to date with the trends to Compose is your middle name.</string>
+    <string name="strongly_dislike">Strongly\nDislike</string>
+    <string name="strongly_like">Strongly\nLike</string>
+    <string name="neutral">Neutral</string>
+
+
+    <!--JetLagged-->
+    <string name="jetlagged_app_heading">JetLagged</string>
+    <string name="average_time_in_bed_heading">AVG. TIME IN BED</string>
+    <string name="average_sleep_time_heading">AVG. SLEEP TIME</string>
+    <string name="not_implemented">Not implemented yet</string>
+    <string name="placeholder_text_ave_time">8h2min</string>
+    <string name="placeholder_text_ave_time_2">7h15min</string>
+    <string name="sleep_type_awake">Awake</string>
+    <string name="sleep_type_rem">REM</string>
+    <string name="sleep_type_light">Light</string>
+    <string name="sleep_type_deep">Deep</string>
+    <string name="sleep_tab_day_heading">Day</string>
+    <string name="sleep_tab_week_heading">Week</string>
+    <string name="sleep_tab_month_heading">Month</string>
+    <string name="sleep_tab_six_months_heading">6M</string>
+    <string name="sleep_tab_one_year_heading">1Y</string>
+
+
+    <!--Jetcaster-->
+    <string name="connection_error_title">Connection error</string>
+    <string name="connection_error_message">Unable to fetch podcasts feeds.\nCheck your internet connection and try again.</string>
+    <string name="retry_label">Retry</string>
+
+    <string name="your_podcasts">Your podcasts</string>
+    <string name="latest_episodes">Latest episodes</string>
+
+    <string name="home_library">Your library</string>
+    <string name="home_discover">Discover</string>
+
+    <string name="updated_longer">Updated a while ago</string>
+    <plurals name="updated_weeks_ago">
+        <item quantity="one">Updated %d week ago</item>
+        <item quantity="other">Updated %d weeks ago</item>
+    </plurals>
+    <plurals name="updated_days_ago">
+        <item quantity="one">Updated yesterday</item>
+        <item quantity="other">Updated %d days ago</item>
+    </plurals>
+    <string name="updated_today">Updated today</string>
+
+    <string name="episode_date_duration">%1$s &#8226; %2$d mins</string>
+
+    <string name="cd_search">Search</string>
+    <string name="cd_account">Account</string>
+    <string name="cd_add">Add</string>
+    <string name="cd_more">More</string>
+    <string name="cd_play">Play</string>
+    <string name="cd_skip_previous">Skip previous</string>
+    <string name="cd_reply10">Reply 10 seconds</string>
+    <string name="cd_forward30">Forward 30 seconds</string>
+    <string name="cd_skip_next">Skip next</string>
+    <string name="cd_unfollow">Unfollow</string>
+    <string name="cd_follow">Follow</string>
+    <string name="cd_following">Following</string>
+    <string name="cd_not_following">Not following</string>
+
+
+    <!-- Owl -->
+    <string name="choose_topics_that_interest_you">Choose topics that interest you</string>
+    <string name="label_continue_to_courses">Continue to courses</string>
+    <string name="label_profile">Profile</string>
+    <string name="label_settings">Settings</string>
+
+    <!-- Courses -->
+    <string name="my_courses">My Courses</string>
+    <string name="featured">Featured</string>
+    <string name="course_step_steps">%1$d / %2$d</string>
+    <string name="label_expand_lessons">Expand lessons sheet</string>
+    <string name="label_collapse_lessons">Collapse lessons sheet</string>
+
+    <!--sample data-->
+    <string name="course_desc">This video course introduces the photography of structures, including urban and rural buildings, monuments, and less traditional structures. Instruction includes the handling of equipment and methods used to capture building interiors and exteriors. The discussion will be about the handling of distortion, varied light sources, and perspective.</string>
+    <string name="what_you_ll_need">What You\'ll Need:</string>
+    <string name="you_ll_also_like">You\'ll Also Like</string>
+    <string name="needs">• DSLR or manual camera\n• 24mm wide angle lens\n• Tripod</string>
+    <string name="step_0">Identify the right aperture for your scene\'s depth of field to achieve the best clarity. Use a narrower aperture so that the entire scene remains in focus.</string>
+    <string name="step_1">Frame the subject of your landscape by making use of the lines and angles present in your scene. Look out for curves, textures, triangles, thirds, and other shapes that improve your composition.</string>
+    <string name="step_2">Find the time of the day with the best light conditions for your scene. Balance the light sources in your composition so that both light and shadows are present, adding depth, texture, and scale to your landscape.</string>
+    <string name="title_activity_main2">MainActivity2</string>
+
+</resources>
