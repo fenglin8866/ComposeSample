@@ -16,7 +16,7 @@
 
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.samples.jetchat.components
+package com.example.compose.jetchat.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.RowScope
@@ -31,8 +31,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.samples.jetchat.theme.JetchatTheme
 import com.xxh.sample.R
+import com.example.compose.jetchat.theme.JetchatTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

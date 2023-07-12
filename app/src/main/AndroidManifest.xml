@@ -102,7 +102,7 @@
             android:exported="true"
             android:theme="@style/Theme.Jetsnack"/>
         <activity
-            android:name="com.samples.jetchat.ChatActivity"
+            android:name="com.example.compose.jetchat.ChatActivity"
             android:exported="true"
             android:theme="@style/Theme.Jetchat"
             android:windowSoftInputMode="adjustResize"/>

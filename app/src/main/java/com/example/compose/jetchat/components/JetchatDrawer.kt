@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetchat.components
+package com.example.compose.jetchat.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -48,10 +48,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.samples.jetchat.data.colleagueProfile
-import com.samples.jetchat.data.meProfile
-import com.samples.jetchat.theme.JetchatTheme
 import com.xxh.sample.R
+import com.example.compose.jetchat.data.colleagueProfile
+import com.example.compose.jetchat.data.meProfile
+import com.example.compose.jetchat.theme.JetchatTheme
 
 @Composable
 fun JetchatDrawerContent(

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetchat.profile
+package com.example.compose.jetchat.profile
 
 import android.content.Context
 import android.os.Bundle
@@ -24,6 +24,7 @@ import android.view.ViewGroup
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -43,11 +44,11 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import com.samples.jetchat.FunctionalityNotAvailablePopup
-import com.samples.jetchat.MainViewModel
-import com.samples.jetchat.components.JetchatAppBar
-import com.samples.jetchat.theme.JetchatTheme
+import com.example.compose.jetchat.FunctionalityNotAvailablePopup
+import com.example.compose.jetchat.MainViewModel
 import com.xxh.sample.R
+import com.example.compose.jetchat.components.JetchatAppBar
+import com.example.compose.jetchat.theme.JetchatTheme
 
 class ProfileFragment : Fragment() {
 
@@ -78,6 +79,8 @@ class ProfileFragment : Fragment() {
 
                 JetchatTheme {
                     JetchatAppBar(
+                        // Reset the minimum bounds that are passed to the root of a compose tree
+                        modifier = Modifier.wrapContentSize(),
                         onNavIconPressed = { activityViewModel.openDrawer() },
                         title = { },
                         actions = {

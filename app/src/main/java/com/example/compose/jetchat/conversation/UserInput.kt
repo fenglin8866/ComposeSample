@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.samples.jetchat.conversation
+package com.example.compose.jetchat.conversation
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.MutableTransitionState
@@ -91,7 +92,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.samples.jetchat.FunctionalityNotAvailablePopup
+import com.example.compose.jetchat.FunctionalityNotAvailablePopup
 import com.xxh.sample.R
 
 enum class InputSelector {
@@ -126,7 +127,7 @@ fun UserInput(
 
     // Intercept back navigation if there's a InputSelector visible
     if (currentInputSelector != InputSelector.NONE) {
-        BackPressHandler(onBackPressed = dismissKeyboard)
+        BackHandler(onBack = dismissKeyboard)
     }
 
     var textState by rememberSaveable(stateSaver = TextFieldValue.Saver) {
@@ -344,7 +345,7 @@ private fun InputSelectorButton(
     }
     IconButton(
         onClick = onClick,
-        modifier = Modifier.size(56.dp).then(backgroundModifier)
+        modifier = Modifier.then(backgroundModifier)
     ) {
         val tint = if (selected) {
             MaterialTheme.colorScheme.onSecondary
@@ -354,7 +355,7 @@ private fun InputSelectorButton(
         Icon(
             icon,
             tint = tint,
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(8.dp).size(56.dp),
             contentDescription = description
         )
     }

@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.samples.jetchat.profile
+package com.example.compose.jetchat.profile
 
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.samples.jetchat.data.colleagueProfile
-import com.samples.jetchat.data.meProfile
+import com.example.compose.jetchat.data.colleagueProfile
+import com.example.compose.jetchat.data.meProfile
 
 class ProfileViewModel : ViewModel() {
 

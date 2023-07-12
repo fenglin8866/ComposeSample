@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetchat.conversation
+package com.example.compose.jetchat.conversation
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.toMutableStateList

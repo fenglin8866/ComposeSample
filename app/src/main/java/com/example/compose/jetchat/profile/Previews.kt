@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.samples.jetchat.profile
+package com.example.compose.jetchat.profile
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.samples.jetchat.data.colleagueProfile
-import com.samples.jetchat.data.meProfile
-import com.samples.jetchat.theme.JetchatTheme
+import com.example.compose.jetchat.data.colleagueProfile
+import com.example.compose.jetchat.data.meProfile
+import com.example.compose.jetchat.theme.JetchatTheme
 
 @Preview(widthDp = 340, name = "340 width - Me")
 @Composable

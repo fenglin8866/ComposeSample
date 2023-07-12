@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetchat.theme
+package com.example.compose.jetchat.theme
 
 import androidx.compose.ui.graphics.Color
 

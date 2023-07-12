@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.samples.jetchat
+package com.example.compose.jetchat
 
 import android.os.Bundle
+import androidx.activity.compose.BackHandler
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.material3.DrawerValue.Closed
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberDrawerState
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -34,10 +34,7 @@ import androidx.core.view.WindowCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.samples.jetchat.components.JetchatDrawer
-import com.samples.jetchat.conversation.BackPressHandler
-import com.samples.jetchat.conversation.LocalBackPressedDispatcher
-//import com.xxh.sample.jetchat.databinding.ContentMainBinding
+import com.example.compose.jetchat.components.JetchatDrawer
 import com.xxh.sample.R
 import com.xxh.sample.databinding.ContentMainBinding
 import kotlinx.coroutines.launch
@@ -60,53 +57,49 @@ class ChatActivity : AppCompatActivity() {
             ComposeView(this).apply {
                 consumeWindowInsets = false
                 setContent {
-                    CompositionLocalProvider(
-                        LocalBackPressedDispatcher provides this@ChatActivity.onBackPressedDispatcher
+                    val drawerState = rememberDrawerState(initialValue = Closed)
+                    val drawerOpen by viewModel.drawerShouldBeOpened
+                        .collectAsStateWithLifecycle()
+
+                    if (drawerOpen) {
+                        // Open drawer and reset state in VM.
+                        LaunchedEffect(Unit) {
+                            // wrap in try-finally to handle interruption whiles opening drawer
+                            try {
+                                drawerState.open()
+                            } finally {
+                                viewModel.resetOpenDrawerAction()
+                            }
+                        }
+                    }
+
+                    // Intercepts back navigation when the drawer is open
+                    val scope = rememberCoroutineScope()
+                    if (drawerState.isOpen) {
+                        BackHandler {
+                            scope.launch {
+                                drawerState.close()
+                            }
+                        }
+                    }
+
+                    JetchatDrawer(
+                        drawerState = drawerState,
+                        onChatClicked = {
+                            findNavController().popBackStack(R.id.nav_home, false)
+                            scope.launch {
+                                drawerState.close()
+                            }
+                        },
+                        onProfileClicked = {
+                            val bundle = bundleOf("userId" to it)
+                            findNavController().navigate(R.id.nav_profile, bundle)
+                            scope.launch {
+                                drawerState.close()
+                            }
+                        }
                     ) {
-                        val drawerState = rememberDrawerState(initialValue = Closed)
-                        val drawerOpen by viewModel.drawerShouldBeOpened
-                            .collectAsStateWithLifecycle()
-
-                        if (drawerOpen) {
-                            // Open drawer and reset state in VM.
-                            LaunchedEffect(Unit) {
-                                // wrap in try-finally to handle interruption whiles opening drawer
-                                try {
-                                    drawerState.open()
-                                } finally {
-                                    viewModel.resetOpenDrawerAction()
-                                }
-                            }
-                        }
-
-                        // Intercepts back navigation when the drawer is open
-                        val scope = rememberCoroutineScope()
-                        if (drawerState.isOpen) {
-                            BackPressHandler {
-                                scope.launch {
-                                    drawerState.close()
-                                }
-                            }
-                        }
-
-                        JetchatDrawer(
-                            drawerState = drawerState,
-                            onChatClicked = {
-                                findNavController().popBackStack(R.id.nav_home, false)
-                                scope.launch {
-                                    drawerState.close()
-                                }
-                            },
-                            onProfileClicked = {
-                                val bundle = bundleOf("userId" to it)
-                                findNavController().navigate(R.id.nav_profile, bundle)
-                                scope.launch {
-                                    drawerState.close()
-                                }
-                            }
-                        ) {
-                            AndroidViewBinding(ContentMainBinding::inflate)
-                        }
+                        AndroidViewBinding(ContentMainBinding::inflate)
                     }
                 }
             }

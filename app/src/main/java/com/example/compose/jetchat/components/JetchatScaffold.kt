@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetchat.components
+package com.example.compose.jetchat.components
 
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue.Closed
@@ -23,7 +23,7 @@ import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import com.samples.jetchat.theme.JetchatTheme
+import com.example.compose.jetchat.theme.JetchatTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

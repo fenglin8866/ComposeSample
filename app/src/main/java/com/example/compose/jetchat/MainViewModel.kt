@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetchat
+package com.example.compose.jetchat
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

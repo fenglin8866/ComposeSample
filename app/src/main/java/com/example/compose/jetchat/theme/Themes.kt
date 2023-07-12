@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetchat.theme
+package com.example.compose.jetchat.theme
 
 import android.annotation.SuppressLint
 import android.os.Build

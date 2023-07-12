@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetchat.conversation
+package com.example.compose.jetchat.conversation
 
 import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.updateTransition

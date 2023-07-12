@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetchat.conversation
+package com.example.compose.jetchat.conversation
 
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetchat.profile
+package com.example.compose.jetchat.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
@@ -64,13 +64,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.samples.jetchat.FunctionalityNotAvailablePopup
-import com.samples.jetchat.components.AnimatingFabContent
-import com.samples.jetchat.components.baselineHeight
-import com.samples.jetchat.data.colleagueProfile
-import com.samples.jetchat.data.meProfile
-import com.samples.jetchat.theme.JetchatTheme
+import com.example.compose.jetchat.FunctionalityNotAvailablePopup
 import com.xxh.sample.R
+import com.example.compose.jetchat.components.AnimatingFabContent
+import com.example.compose.jetchat.components.baselineHeight
+import com.example.compose.jetchat.data.colleagueProfile
+import com.example.compose.jetchat.data.meProfile
+import com.example.compose.jetchat.theme.JetchatTheme
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable

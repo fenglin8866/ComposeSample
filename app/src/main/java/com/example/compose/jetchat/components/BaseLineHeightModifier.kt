@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetchat.components
+package com.example.compose.jetchat.components
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.FirstBaseline

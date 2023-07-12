@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetchat
+package com.example.compose.jetchat
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
