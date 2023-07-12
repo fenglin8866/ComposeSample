@@ -16,6 +16,7 @@
 
 package androidx.compose.material3.samples
 
+import android.annotation.SuppressLint
 import androidx.annotation.Sampled
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -122,7 +123,7 @@ fun AnimatedExtendedFloatingActionButtonSample() {
         isFloatingActionButtonDocked = false,
         floatingActionButtonPosition = FabPosition.End,
     ) {
-        LazyColumn(state = listState, modifier = Modifier.fillMaxSize()) {
+        LazyColumn(state = listState, modifier = Modifier.fillMaxSize().padding(it)) {
             for (index in 0 until 100) {
                 item {
                     Text(

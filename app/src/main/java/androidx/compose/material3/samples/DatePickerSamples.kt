@@ -15,6 +15,7 @@
  */
 package androidx.compose.material3.samples
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.Sampled
 import androidx.compose.foundation.layout.Arrangement
@@ -70,6 +71,7 @@ fun DatePickerSample() {
     }
 }
 
+@SuppressLint("UnrememberedMutableState")
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Sampled
