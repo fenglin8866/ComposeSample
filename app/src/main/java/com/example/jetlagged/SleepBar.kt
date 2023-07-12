@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetlagged
+package com.example.jetlagged
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -77,7 +77,7 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
-import com.samples.jetlagged.theme.LegendHeadingStyle
+import com.example.jetlagged.ui.theme.LegendHeadingStyle
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable

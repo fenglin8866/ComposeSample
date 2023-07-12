@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetlagged
+package com.example.jetlagged
 
 import android.graphics.Color
 import android.graphics.RuntimeShader
@@ -27,9 +27,9 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.ShaderBrush
-import com.samples.jetlagged.theme.White
-import com.samples.jetlagged.theme.Yellow
-import com.samples.jetlagged.theme.YellowVariant
+import com.example.jetlagged.ui.theme.White
+import com.example.jetlagged.ui.theme.Yellow
+import com.example.jetlagged.ui.theme.YellowVariant
 import org.intellij.lang.annotations.Language
 
 fun Modifier.yellowBackground(): Modifier = this.composed {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetlagged.theme
+package com.example.jetlagged.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

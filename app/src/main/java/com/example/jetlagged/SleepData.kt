@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.samples.jetlagged
+package com.example.jetlagged
 
 import androidx.compose.ui.graphics.Color
-import com.samples.jetlagged.theme.Yellow_Awake
-import com.samples.jetlagged.theme.Yellow_Deep
-import com.samples.jetlagged.theme.Yellow_Light
-import com.samples.jetlagged.theme.Yellow_Rem
+import com.example.jetlagged.ui.theme.Yellow_Awake
+import com.example.jetlagged.ui.theme.Yellow_Deep
+import com.example.jetlagged.ui.theme.Yellow_Light
+import com.example.jetlagged.ui.theme.Yellow_Rem
 import com.xxh.sample.R
 import java.time.Duration
 import java.time.LocalDateTime

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetlagged
+package com.example.jetlagged
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
@@ -33,9 +33,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.samples.jetlagged.theme.SmallHeadingStyle
-import com.samples.jetlagged.theme.White
-import com.samples.jetlagged.theme.Yellow
+import com.example.jetlagged.ui.theme.SmallHeadingStyle
+import com.example.jetlagged.ui.theme.White
+import com.example.jetlagged.ui.theme.Yellow
 import com.xxh.sample.R
 
 enum class SleepTab(val title: Int) {

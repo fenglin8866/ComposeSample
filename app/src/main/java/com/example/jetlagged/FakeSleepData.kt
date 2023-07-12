@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetlagged
+package com.example.jetlagged
 
 import java.time.LocalDateTime
 

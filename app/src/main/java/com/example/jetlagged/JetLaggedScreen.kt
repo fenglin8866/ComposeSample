@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetlagged
+package com.example.jetlagged
 
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
@@ -42,9 +42,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.samples.jetlagged.theme.SmallHeadingStyle
-import com.samples.jetlagged.theme.Yellow
-import com.samples.jetlagged.theme.YellowVariant
+import com.example.jetlagged.ui.theme.SmallHeadingStyle
+import com.example.jetlagged.ui.theme.Yellow
+import com.example.jetlagged.ui.theme.YellowVariant
 import java.time.DayOfWeek
 import java.time.format.TextStyle
 import java.util.Locale

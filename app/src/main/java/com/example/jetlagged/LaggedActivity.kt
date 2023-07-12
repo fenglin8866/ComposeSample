@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.samples.jetlagged
+package com.example.jetlagged
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -24,7 +24,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.core.view.WindowCompat
-import com.samples.jetlagged.theme.JetLaggedTheme
+import com.example.jetlagged.ui.theme.JetLaggedTheme
 
 class LaggedActivity : ComponentActivity() {
 
