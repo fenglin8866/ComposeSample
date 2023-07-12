@@ -119,7 +119,7 @@
             android:exported="true"
             android:theme="@style/Theme.Jetcaster"/>
         <activity
-            android:name="com.samples.owl.ui.OwlActivity"
+            android:name="com.example.owl.ui.OwlActivity"
             android:exported="true"
             android:theme="@style/Theme.Owl"/>
         <activity

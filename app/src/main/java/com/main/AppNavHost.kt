@@ -27,9 +27,9 @@ import com.example.jetcaster.ui.CasterActivity
 import com.example.jetlagged.LaggedActivity
 import com.example.jetnews.ui.JetnewsActivity
 import com.example.jetsnack.ui.SnackActivity
+import com.example.owl.ui.OwlActivity
 import com.example.rally.RallyActivity
 import com.example.reply.ui.ReplyActivity
-import com.samples.owl.ui.OwlActivity
 import com.xxh.sample.TestDemoScreen
 
 
