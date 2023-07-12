@@ -107,7 +107,7 @@
             android:theme="@style/Theme.Jetchat"
             android:windowSoftInputMode="adjustResize"/>
         <activity
-            android:name="com.samples.jetsurvey.SurveyActivity"
+            android:name="com.example.compose.jetsurvey.SurveyActivity"
             android:exported="true"
             android:theme="@style/Theme.Jetsurvey"/>
         <activity

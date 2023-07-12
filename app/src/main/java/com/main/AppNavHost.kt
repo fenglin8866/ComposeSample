@@ -20,6 +20,7 @@ import com.codelabs.basiclayouts.BasicLayoutsActivity
 import com.codelabs.basics.BasicActivity
 import com.codelabs.state.StateActivity
 import com.codelabs.theming.ui.start.ThemeStartActivity
+import com.example.compose.jetsurvey.SurveyActivity
 import com.example.crane.home.CraneActivity
 import com.example.jetcaster.ui.CasterActivity
 import com.example.jetnews.ui.JetnewsActivity
@@ -28,7 +29,6 @@ import com.example.reply.ui.ReplyActivity
 import com.samples.jetchat.ChatActivity
 import com.samples.jetlagged.LaggedActivity
 import com.samples.jetsnack.ui.SnackActivity
-import com.samples.jetsurvey.SurveyActivity
 import com.samples.owl.ui.OwlActivity
 import com.xxh.sample.TestDemoScreen
 
