@@ -25,10 +25,10 @@ import com.example.compose.jetsurvey.SurveyActivity
 import com.example.crane.home.CraneActivity
 import com.example.jetcaster.ui.CasterActivity
 import com.example.jetnews.ui.JetnewsActivity
+import com.example.jetsnack.ui.SnackActivity
 import com.example.rally.RallyActivity
 import com.example.reply.ui.ReplyActivity
 import com.samples.jetlagged.LaggedActivity
-import com.samples.jetsnack.ui.SnackActivity
 import com.samples.owl.ui.OwlActivity
 import com.xxh.sample.TestDemoScreen
 

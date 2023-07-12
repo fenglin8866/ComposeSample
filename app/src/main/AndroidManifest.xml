@@ -98,7 +98,7 @@
             android:name=".NavActivity"
             android:exported="true" />
         <activity
-            android:name="com.samples.jetsnack.ui.SnackActivity"
+            android:name="com.example.jetsnack.ui.SnackActivity"
             android:exported="true"
             android:theme="@style/Theme.Jetsnack"/>
         <activity
