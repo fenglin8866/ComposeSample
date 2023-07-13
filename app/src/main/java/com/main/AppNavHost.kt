@@ -30,8 +30,9 @@ import com.example.jetsnack.ui.SnackActivity
 import com.example.owl.ui.OwlActivity
 import com.example.rally.RallyActivity
 import com.example.reply.ui.ReplyActivity
-import com.xxh.sample.TestDemoScreen
-
+import com.main.data.SampleData
+import com.main.ui.ListScreen
+import com.xxh.sample.ui.TestDemoApp
 
 interface MainDestinations {
     val icon: ImageVector
@@ -56,7 +57,7 @@ object Demo : MainDestinations {
 val bottomScreens = listOf(Codelabs, Samples, Demo)
 
 @Composable
-fun AppNavHost(navController: NavHostController, modifier: Modifier) {
+fun AppNavHost(navController: NavHostController, modifier: Modifier,showBottomEvent:(Boolean)->Unit) {
     val context = LocalContext.current
     NavHost(
         navController = navController,
@@ -100,7 +101,9 @@ fun AppNavHost(navController: NavHostController, modifier: Modifier) {
                 }
             }
         }
-        composable(Demo.route) { TestDemoScreen() }
+        composable(Demo.route) {
+            TestDemoApp(showBottomEvent)
+        }
     }
 }
 

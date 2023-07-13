@@ -26,7 +26,7 @@ import com.example.jetnews.data.AppContainerImpl
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class MyApplication : Application() , ImageLoaderFactory {
+class SampleApplication : Application() , ImageLoaderFactory {
 
     // AppContainer instance used by the rest of classes to obtain dependencies
     lateinit var container: AppContainer

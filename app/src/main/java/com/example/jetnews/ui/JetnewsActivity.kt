@@ -20,7 +20,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import com.MyApplication
+import com.SampleApplication
 
 class JetnewsActivity : AppCompatActivity() {
 
@@ -28,7 +28,7 @@ class JetnewsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        val appContainer = (application as MyApplication).container
+        val appContainer = (application as SampleApplication).container
         setContent {
             JetnewsApp(appContainer)
         }

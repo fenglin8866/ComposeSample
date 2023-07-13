@@ -1,4 +1,4 @@
-package com.main
+package com.main.data
 
 object SampleData {
     // Sample conversation data
@@ -81,7 +81,7 @@ object SampleData {
     val conversationSample3 = listOf(
         Message(
             1,
-            "JetSnack"
+            "state"
         ),
         Message(
             2,
