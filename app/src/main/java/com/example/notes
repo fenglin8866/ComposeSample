@@ -1,0 +1,124 @@
+JetNews(Accessibility & themes)
+A sample blog post viewer that demonstrates the use of Compose with a typical Material app and real-world architecture.
+一个示例博客文章查看器，演示如何将 Compose 与典型的 Material 应用程序和实际体系结构结合使用。
+• Medium complexity
+• Varied UI
+• Light & dark themes
+• Resource loading
+• UI Testing
+
+Reply(AdaptiveUI)
+Reply研究的撰写实现，这是一个电子邮件客户端应用程序，专注于移动设备、平板电脑和可折叠设备的自适应设计。它还展示了全新的材料设计3主题，动态颜色和导航组件。
+• Medium complexity
+• Adaptive UI for phones, tablet and desktops
+• Foldable support
+• Material 3 theming & Components
+• Dynamic colors and Light/Dark theme support
+
+Rally(Navigation)
+A Compose implementation of the Rally Material study, a financial app that focuses on data, charts, reusability and animations.
+Rally Material 研究的 Compose 实现，这是一个专注于数据、图表、可重用性和动画的金融应用程序。
+• Low complexity
+• Material theming with a dark-only theme
+• Custom layouts and reusable elements
+• Charts and tables
+• Animations
+• Screenshot tests
+
+Crane(AdvancedState&&SideEffects)
+A Compose implementation of the Crane Material study, a travel app that uses Material Design components and Material Theming to create a personalized, on-brand experience.
+Crane研究的 Compose 实现，这是一款旅行应用程序，它使用材料设计组件和材料主题来创建个性化的品牌体验。
+• Medium complexity
+• Draggable UI elements
+• UI state handling
+• UI Tests
+
+
+=============================================================================================================================
+
+Jetchat
+A sample chat app that focuses on UI state patterns and text input.
+专注于 UI 状态模式和文本输入的示例聊天应用。
+• Low complexity
+• Material Design 3 theme and Material You dynamic color
+• Resource loading
+• Back button handling
+• Integration with Architecture Components: Navigation, Fragments, LiveData, ViewModel
+• Animation
+• UI Testing
+
+Jetsurvey
+A sample survey app that showcases text input, validation and UI state management in Compose.
+一个示例调查应用，用于展示 Compose 中的文本输入、验证和 UI 状态管理。
+• Low complexity
+• TextField and form validation
+• Snackbar implementation
+• Element reusability and styling
+• Various form elements
+
+Jetsnack
+Jetsnack is a sample snack ordering app built with Compose.
+Jetsnack 是使用 Compose 构建的示例零食订购应用程序。
+• Medium complexity
+• Custom design system
+• Custom layouts
+• Animation
+
+Jetcaster
+A sample podcast app that features a full-featured, Redux-style architecture and showcases dynamic themes.
+一个示例播客应用，具有功能齐全的 Redux 风格架构并展示动态主题。
+• Advanced sample
+• Dynamic theming using podcast artwork
+• Image fetching
+• WindowInsets support
+• Coroutines
+• Local storage with Room
+
+Owl
+猫头鹰Material研究的撰写实现。猫头鹰品牌使用大胆的颜色、形状和排版来表达其品牌属性：活力、大胆和有趣
+A Compose implementation of the Owl Material study. The Owl brand uses bold color, shape, and typography to express its brand attributes: energy, daring, and fun.
+• Medium complexity
+• Material theming & light/dark themes
+• Custom layout
+• Animation
+
+JetLagged
+示例睡眠跟踪器应用，演示如何在 Compose 中创建自定义布局和图形
+• Custom Layouts
+• Graphs with Paths
+
+==============================================================================================
+
+Looking for a sample that has the following features?
+
+Custom Layouts
+Jetnews: Interests Screen
+Jetchat: AnimatedFabContent
+Jetsnack: Grid
+Jetsnack: CollapsingImageLayout
+Owl: Staggered Grid
+
+Theming
+Jetchat: Material3
+Jetcaster: Custom theme based on cover art
+Jetsnack: Custom Design System
+
+
+Animations
+Crane: Calendar Selection Animation
+Crane: AnimatedContent
+Jetsurvey: AnimatedContent
+Jetcaster: Animated theme colors
+Owl: Transition - Topic Chip change
+Jetsnack: Animating Bottom Barl
+Owl: Bottom Sheet transforming
+
+
+Text
+Jetchat: Downloadable Fonts
+
+
+Large Screens
+Jetcaster - Tabletop mode
+Jetnews - Window Size Classes
+Crane - Window Size Classes
