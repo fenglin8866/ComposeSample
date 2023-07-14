@@ -1,5 +1,6 @@
 package com.example.rally
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -17,10 +18,19 @@ import com.example.rally.ui.overview.OverviewScreen
 fun RallyNavHost(navController: NavHostController, modifier: Modifier) {
     NavHost(
         navController = navController,
-        startDestination = "home",
+        startDestination = Overview.route,
         modifier = modifier
     ) {
-
+        composable(Overview.route) {
+            Log.i("xxh714","route=$Overview.route")
+            OverviewScreen(onClickSeeAllAccounts = {
+                navController.navigateSingleTopTo(Accounts.route)
+            }, onClickSeeAllBills = {
+                navController.navigateSingleTopTo(Bills.route)
+            }) { arg ->
+                navController.navigateToSingleAccount(arg)
+            }
+        }
         addHomeGraph(navController)
 
         composable(
@@ -34,21 +44,15 @@ fun RallyNavHost(navController: NavHostController, modifier: Modifier) {
 
 fun NavGraphBuilder.addHomeGraph(navController: NavHostController) {
     navigation(startDestination = Overview.route, route = "home") {
-        composable(Overview.route) {
-            OverviewScreen(onClickSeeAllAccounts = {
-                navController.navigateSingleTopTo(Accounts.route)
-            }, onClickSeeAllBills = {
-                navController.navigateSingleTopTo(Bills.route)
-            }) { arg ->
-                navController.navigateToSingleAccount(arg)
-            }
-        }
+
         composable(Accounts.route) {
+            Log.i("xxh714","route=$Accounts.route")
             AccountsScreen {
                 navController.navigateToSingleAccount(it)
             }
         }
         composable(Bills.route) {
+            Log.i("xxh714","route=$Bills.route")
             BillsScreen()
         }
     }

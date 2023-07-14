@@ -25,7 +25,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.rallyend.ui.components.RallyTabRow
@@ -35,7 +34,7 @@ import com.example.rallyend.ui.theme.RallyTheme
  * This Activity recreates part of the Rally Material Study from
  * https://material.io/design/material-studies/rally.html
  */
-class RallyActivity : ComponentActivity() {
+class RallyActivityEnd : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

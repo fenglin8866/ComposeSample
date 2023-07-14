@@ -5,6 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.main.navigateSingleTopTo
 import com.main.ui.theme.SampleAppTheme
@@ -33,7 +34,11 @@ import com.xxh.sample.property.PropertyScreen
 import com.xxh.sample.state.StateScreen
 import com.xxh.sample.theme.ThemeScreen
 
-
+/*todo 二级页面，怎么隐藏底部状态栏
+*  1.公用首页NavGraph，导航时当不在底部栏的route时隐藏
+*  2.不是同一个导航图，使用顶层共享变量来控制
+*  3.不使用Bottombar,页面布局跳转
+* */
 object TestDestination {
     const val HOME_ROUTE = "test_home"
     const val BASICS_ROUTE = "basics"
@@ -54,13 +59,12 @@ val testData = listOf(
     PROPERTY_ROUTE, NAVIGATION_ROUTE, THEMING_ROUTE, IMAGES_ROUTE, GRAPHICS_ROUTE, ANIMATION_ROUTE
 )
 
+/**
+ * 1.公用首页NavGraph，导航时当不在底部栏的route时隐藏  推荐使用
+ */
 fun NavGraphBuilder.testGraph(navController: NavHostController) {
+   // navigation(startDestination = BASICS_ROUTE, route = HOME_ROUTE) {
 
-        /*todo 二级页面，怎么隐藏底部状态栏
-        *  1.公用首页NavGraph，导航时当不在底部栏的route时隐藏
-        *  2.不是同一个导航图，使用顶层共享变量来控制
-        *  3.不使用Bottombar,页面布局跳转
-        * */
         composable(BASICS_ROUTE) {
             BasicsScreen()
         }
@@ -94,9 +98,13 @@ fun NavGraphBuilder.testGraph(navController: NavHostController) {
         composable(ANIMATION_ROUTE) {
             AnimScreen()
         }
+   // }
 }
 
 
+/**
+ * 2.不是同一个导航图，使用顶层共享变量来控制
+ */
 @Composable
 fun TestDemoApp(showBottomEvent: (Boolean) -> Unit) {
     SampleAppTheme {
@@ -115,12 +123,9 @@ fun TestGraph(
                 navController.navigateSingleTopTo(it)
             }
         }
-        /*todo 二级页面，怎么隐藏底部状态栏
-        *  1.公用首页NavGraph，导航时当不在底部栏的route时隐藏
-        *  2.不是同一个导航图，使用顶层共享变量来控制
-        * */
+
         composable(STATE_ROUTE) {
-            ConversationScreen(showBottomEvent)
+            ConversationScreen()
         }
     }
 }
