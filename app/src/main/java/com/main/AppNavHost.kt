@@ -1,5 +1,6 @@
 package com.main
 
+import android.content.Context
 import android.content.Intent
 import androidx.compose.material.catalog.CatalogActivity
 import androidx.compose.material.icons.Icons
@@ -11,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -63,6 +63,47 @@ val bottomScreens = listOf(Demo, Codelabs, Samples)
 fun AppNavHost(
     navController: NavHostController,
     modifier: Modifier,
+    clickDemo: (String) -> Unit,
+    clickCodelabs: (String, Context) -> Unit,
+    clickSample: (String, Context) -> Unit
+) {
+    val context = LocalContext.current
+    NavHost(
+        navController = navController,
+        startDestination = "demo",
+        modifier = modifier
+    ) {
+        composable(Codelabs.route) {
+            ListScreenMsg(data = HomeData.conversationSample) {
+                clickCodelabs(it, context)
+            }
+        }
+
+        composable(Samples.route) {
+            ListScreen(data = HomeData.conversationSample2,
+                trans = { return@ListScreen it.title }) {
+                clickSample(it, context)
+            }
+        }
+
+        composable(Demo.route) {
+            TestMainScreen(testData, onClickAction = clickDemo)
+            /* //NavHost适合跳转，不适合tab切换
+             TestDemoApp(showBottomEvent)*/
+        }
+
+        testGraph()
+
+    }
+}
+
+/**
+ * 提升state之前的逻辑
+ */
+@Composable
+fun AppNavHost(
+    navController: NavHostController,
+    modifier: Modifier
 ) {
     val context = LocalContext.current
     NavHost(
@@ -112,23 +153,14 @@ fun AppNavHost(
             TestMainScreen(testData) {
                 navController.navigate(it)
             }
-           /* //NavHost适合跳转，不适合tab切换
-            TestDemoApp(showBottomEvent)*/
+            /* //NavHost适合跳转，不适合tab切换
+             TestDemoApp(showBottomEvent)*/
         }
 
-        testGraph(navController)
+        testGraph()
 
     }
 }
 
-fun NavHostController.navigateSingleTopTo(route: String) {
-    navigate(route) {
-        //获取栈中第一个NavDestination
-        popUpTo(graph.findStartDestination().id) {
-            saveState = true
-        }
-        launchSingleTop = true
-        restoreState = true
-    }
-}
+
 

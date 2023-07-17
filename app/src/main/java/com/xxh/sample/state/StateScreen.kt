@@ -11,7 +11,7 @@ fun StateScreen() {
 }
 
 /**
- * 跳转二页面的方式1：通过State变量变化重组
+ * 跳转页面的方式1：通过State变量变化重组
  */
 @Composable
 fun ShowWay1() {
@@ -28,7 +28,7 @@ fun ShowWay1() {
 }
 
 /**
- * 跳转二页面的方式2：通过Navigation  推荐使用
+ * 跳转页面的方式2：通过Navigation  推荐使用
  */
 @Composable
 fun ShowWay2() {

@@ -5,7 +5,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.main.navigateSingleTopTo
 import com.main.ui.theme.SampleAppTheme
@@ -13,7 +12,6 @@ import com.xxh.sample.TestDestination.ANIMATION_ROUTE
 import com.xxh.sample.TestDestination.BASICS_ROUTE
 import com.xxh.sample.TestDestination.COMPONENT_ROUTE
 import com.xxh.sample.TestDestination.GRAPHICS_ROUTE
-import com.xxh.sample.state.ConversationScreen
 import com.xxh.sample.TestDestination.HOME_ROUTE
 import com.xxh.sample.TestDestination.IMAGES_ROUTE
 import com.xxh.sample.TestDestination.LAYOUT_ROUTE
@@ -22,6 +20,7 @@ import com.xxh.sample.TestDestination.NAVIGATION_ROUTE
 import com.xxh.sample.TestDestination.PROPERTY_ROUTE
 import com.xxh.sample.TestDestination.STATE_ROUTE
 import com.xxh.sample.TestDestination.THEMING_ROUTE
+import com.xxh.sample.state.ConversationScreen
 import com.xxh.sample.animation.AnimScreen
 import com.xxh.sample.basics.BasicsScreen
 import com.xxh.sample.component.ComponentScreen
@@ -61,49 +60,51 @@ val testData = listOf(
 
 /**
  * 1.公用首页NavGraph，导航时当不在底部栏的route时隐藏  推荐使用
+ *
+ * 不用navController，如果需要使用navController的方法，提升到顶层的state容器
  */
-fun NavGraphBuilder.testGraph(navController: NavHostController) {
-   // navigation(startDestination = BASICS_ROUTE, route = HOME_ROUTE) {
-
-        composable(BASICS_ROUTE) {
-            BasicsScreen()
-        }
-        composable(LIFECYCLE_ROUTE) {
-            LifecycleScreen()
-        }
-        composable(STATE_ROUTE) {
-            StateScreen()
-        }
-        composable(LAYOUT_ROUTE) {
-            LayoutScreen()
-        }
-        composable(COMPONENT_ROUTE) {
-            ComponentScreen()
-        }
-        composable(PROPERTY_ROUTE) {
-            PropertyScreen()
-        }
-        composable(NAVIGATION_ROUTE) {
-            NavigationScreen()
-        }
-        composable(THEMING_ROUTE) {
-            ThemeScreen()
-        }
-        composable(IMAGES_ROUTE) {
-            ImagesScreen()
-        }
-        composable(GRAPHICS_ROUTE) {
-            GraphicsScreen()
-        }
-        composable(ANIMATION_ROUTE) {
-            AnimScreen()
-        }
-   // }
+fun NavGraphBuilder.testGraph() {
+    // navigation(startDestination = BASICS_ROUTE, route = HOME_ROUTE) {
+    composable(BASICS_ROUTE) {
+        BasicsScreen()
+    }
+    composable(LIFECYCLE_ROUTE) {
+        LifecycleScreen()
+    }
+    composable(STATE_ROUTE) {
+        StateScreen()
+    }
+    composable(LAYOUT_ROUTE) {
+        LayoutScreen()
+    }
+    composable(COMPONENT_ROUTE) {
+        ComponentScreen()
+    }
+    composable(PROPERTY_ROUTE) {
+        PropertyScreen()
+    }
+    composable(NAVIGATION_ROUTE) {
+        NavigationScreen()
+    }
+    composable(THEMING_ROUTE) {
+        ThemeScreen()
+    }
+    composable(IMAGES_ROUTE) {
+        ImagesScreen()
+    }
+    composable(GRAPHICS_ROUTE) {
+        GraphicsScreen()
+    }
+    composable(ANIMATION_ROUTE) {
+        AnimScreen()
+    }
+    // }
 }
 
 
 /**
  * 2.不是同一个导航图，使用顶层共享变量来控制
+ * 使用副效应，当进入组合时，变量隐藏，退出组合时，变量显示
  */
 @Composable
 fun TestDemoApp(showBottomEvent: (Boolean) -> Unit) {
