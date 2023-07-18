@@ -33,13 +33,13 @@ fun StateNavGraph(navController: NavHostController) {
             }
         }
         composable(DEV_ROUTE) {
-            ConversationScreen()
+            HelloContent()
         }
         composable(CODELAB_ROUTE) {
             WellnessScreen()
         }
         composable(BLOG_ROUTE) {
-
+            ConversationScreen()
         }
     }
 }

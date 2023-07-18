@@ -5,9 +5,11 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -22,6 +24,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -79,21 +82,26 @@ private fun ConversationScreen(
 fun ConversationScreen() {
     val scope = rememberCoroutineScope()
     val lazyListState = rememberLazyListState() // State hoisted to the ConversationScreen
+    Column {
+        MessagesList(SampleData.conversationSample, lazyListState,scope) // Reuse same state in MessageList
 
-    MessagesList(SampleData.conversationSample, lazyListState,scope) // Reuse same state in MessageList
+        /*UserInput(
+            onMessageSent = { // Apply UI logic to lazyListState
+                scope.launch {
+                    lazyListState.scrollToItem(0)
+                }
+            },
+        )*/
+    }
 
-    UserInput(
-        onMessageSent = { // Apply UI logic to lazyListState
-            scope.launch {
-                lazyListState.scrollToItem(0)
-            }
-        },
-    )
 }
 
 @Composable
-private fun UserInput(onMessageSent:()->Unit){
-
+private fun UserInput(onMessageSent: () -> Unit) {
+    var name by remember {
+        mutableStateOf("")
+    }
+    TextField(value = name, onValueChange = { name = it })
 }
 
 @Composable
@@ -102,19 +110,21 @@ private fun MessagesList(
     lazyListState: LazyListState = rememberLazyListState(),// LazyListState has a default value
     scope: CoroutineScope
 ) {
-    LazyColumn(
-        state = lazyListState // Pass hoisted state to LazyColumn
-    ) {
-        items(messages) { item ->
-            MessageCard3(item)
+    Column(Modifier.fillMaxSize()){
+        LazyColumn(
+            state = lazyListState // Pass hoisted state to LazyColumn
+        ) {
+            items(messages) { item ->
+                MessageCard3(item)
+            }
         }
-    }
 
-    JumpToBottom(onClicked = {
-        scope.launch {
-            lazyListState.scrollToItem(messages.size-1) // UI logic being applied to lazyListState
-        }
-    })
+        JumpToBottom(onClicked = {
+            scope.launch {
+                lazyListState.scrollToItem(messages.size-1) // UI logic being applied to lazyListState
+            }
+        })
+    }
 }
 
 @Composable
