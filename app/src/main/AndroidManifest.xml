@@ -27,6 +27,11 @@
         android:theme="@style/ThemeBasic"
         tools:targetApi="31">
         <activity
+            android:name="com.codelabs.state.test.StateTestActivity"
+            android:exported="false"
+            android:label="@string/title_activity_state_test"
+            android:theme="@style/ThemeBasic" />
+        <activity
             android:name="com.main.MainActivity"
             android:exported="true"
             android:label="@string/app_name">
@@ -89,7 +94,7 @@
         <activity
             android:name="com.example.crane.home.CraneActivity"
             android:exported="true"
-            android:theme="@style/Theme.Crane"/>
+            android:theme="@style/Theme.Crane" />
         <activity
             android:name="com.example.crane.details.CraneDetailsActivity"
             android:exported="true"
@@ -97,32 +102,32 @@
         <activity
             android:name="com.example.jetsnack.ui.SnackActivity"
             android:exported="true"
-            android:theme="@style/Theme.Jetsnack"/>
+            android:theme="@style/Theme.Jetsnack" />
         <activity
             android:name="com.example.compose.jetchat.ChatActivity"
             android:exported="true"
             android:theme="@style/Theme.Jetchat"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.example.compose.jetsurvey.SurveyActivity"
             android:exported="true"
-            android:theme="@style/Theme.Jetsurvey"/>
+            android:theme="@style/Theme.Jetsurvey" />
         <activity
             android:name="com.example.jetlagged.LaggedActivity"
             android:exported="true"
-            android:theme="@style/Theme.JetLagged"/>
+            android:theme="@style/Theme.JetLagged" />
         <activity
             android:name="com.example.jetcaster.ui.CasterActivity"
             android:exported="true"
-            android:theme="@style/Theme.Jetcaster"/>
+            android:theme="@style/Theme.Jetcaster" />
         <activity
             android:name="com.example.owl.ui.OwlActivity"
             android:exported="true"
-            android:theme="@style/Theme.Owl"/>
+            android:theme="@style/Theme.Owl" />
         <activity
             android:name="androidx.compose.material.catalog.CatalogActivity"
             android:exported="true"
-            android:theme="@style/Theme.Catalog"/>
+            android:theme="@style/Theme.Catalog" />
     </application>
 
 </manifest>
