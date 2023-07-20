@@ -14,7 +14,6 @@ import com.codelabs.animation.AnimationActivity
 import com.codelabs.basiclayouts.BasicLayoutsActivity
 import com.codelabs.basics.BasicActivity
 import com.codelabs.state.StateActivity
-import com.codelabs.state.test.StateTestActivity
 import com.codelabs.theming.ui.start.ThemeStartActivity
 import com.example.compose.jetchat.ChatActivity
 import com.example.compose.jetsurvey.SurveyActivity
@@ -67,7 +66,7 @@ class AppState(val navController: NavHostController) {
     fun clickCodelabs(content: String, context: Context) {
         var intent: Intent? = null
         when (content) {
-            "State" -> intent = Intent(context, StateTestActivity::class.java)
+            "State" -> intent = Intent(context, StateActivity::class.java)
             "JetNew" -> intent = Intent(context, JetnewsActivity::class.java)
             "Reply" -> intent = Intent(context, ReplyActivity::class.java)
             "Animation" -> intent = Intent(context, AnimationActivity::class.java)

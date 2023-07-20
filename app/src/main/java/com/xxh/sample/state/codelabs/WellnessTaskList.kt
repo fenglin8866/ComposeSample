@@ -1,4 +1,4 @@
-package com.codelabs.state.test
+package com.xxh.sample.state.codelabs
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,6 +11,10 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+
+/**
+ * 列表1，默认状态处理。用于测试，预览
+ */
 @Composable
 fun WellnessTaskList(modifier: Modifier = Modifier) {
     val taskDataState = tasks1.toMutableStateList()

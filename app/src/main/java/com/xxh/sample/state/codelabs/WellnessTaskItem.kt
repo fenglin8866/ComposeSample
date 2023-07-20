@@ -1,4 +1,4 @@
-package com.codelabs.state.test
+package com.xxh.sample.state.codelabs
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -37,14 +37,13 @@ fun WellnessTaskItem(
 
 @Composable
 fun WellnessTaskItem(
-    //taskName: String,
     task: WellnessTask,
     onCheckedChange: ((WellnessTask, Boolean) -> Unit)? = null,
     onClose: (WellnessTask) -> Unit,
     modifier: Modifier = Modifier
 ) {
     /**
-     *  滑动列表，导致item不可见，移除组合，导致状态初始化
+     *  滑动列表，item不可见，移除组合，导致状态初始化
      *  1.rememberSaveable
      *  2.状态提升组件外
      *

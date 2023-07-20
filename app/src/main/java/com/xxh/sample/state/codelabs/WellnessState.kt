@@ -1,4 +1,4 @@
-package com.codelabs.state.test
+package com.xxh.sample.state.codelabs
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -6,6 +6,9 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 
+/**
+ * 普通状态容器，封装界面逻辑和状态提升
+ */
 @Composable
 fun rememberWellnessState(
     showState: MutableState<Boolean> = remember {

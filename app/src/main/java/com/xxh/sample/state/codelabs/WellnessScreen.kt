@@ -2,205 +2,163 @@ package com.xxh.sample.state.codelabs
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
+import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
+/**
+ * 状态提升：ViewModel+状态容器
+ */
+@Composable
+fun WellnessScreen2(
+    wellnessViewModel: WellnessViewModel = viewModel(),
+    wellnessState: WellnessState = rememberWellnessState(),
+    modifier: Modifier = Modifier
+) {
+    Column(modifier) {
+        Row(modifier = modifier.padding(start = 16.dp)) {
+            Button(
+                onClick = { wellnessState.routeState.value = "main" },
+                modifier = modifier
+            ) {
+                Text(text = "主页")
+            }
+            Button(
+                onClick = { wellnessState.routeState.value = "list1" },
+                modifier = modifier.padding(start = 10.dp)
+            ) {
+                Text(text = "列表1")
+            }
+            Button(
+                onClick = { wellnessState.showState.value = !wellnessState.showState.value },
+                modifier = modifier.padding(start = 10.dp)
+            ) {
+                Text(text = "${wellnessState.testChange()}列表2")
+            }
+        }
+
+        wellnessState.handle(showMain = {
+            MainScreen(modifier)
+        }, showList1 = {
+            //点击切换时不会保存状态，因为数据赋值在列表的组合项内
+            WellnessTaskList(modifier)
+        }) {
+            WellnessTaskList(
+                wellnessViewModel.taskData,
+                wellnessViewModel::checkedHint,
+                wellnessViewModel::onCloseTask,
+                modifier
+            )
+        }
+    }
+}
+
+/**
+ * 状态提升：ViewModel
+ */
+@Composable
+fun WellnessScreen(
+    wellnessViewModel: WellnessViewModel = viewModel(),
+    modifier: Modifier = Modifier
+) {
+    WellnessScreen(
+        wellnessViewModel.taskData,
+        wellnessViewModel::checkedHint,
+        wellnessViewModel::onCloseTask,
+        modifier
+    )
+}
 
 @Composable
 fun WellnessScreen(
-    modifier: Modifier = Modifier,
-    wellnessViewModel: WellnessViewModel = viewModel()
+    tasks: List<WellnessTask>? = null,
+    onCheckedChange: ((WellnessTask, Boolean) -> Unit)? = null,
+    onClose: ((WellnessTask) -> Unit)? = null,
+    modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier) {
-        StatefulCounter()
+    Column(modifier) {
+        //控制切换主页和list1
+        var route by remember {
+            mutableStateOf("main")
+        }
+        //控制显示隐藏list2
+        var showList by remember {
+            mutableStateOf(false)
+        }
 
-        WellnessTasksList(
-            list = wellnessViewModel.tasks,
-            onCheckedTask = { task, checked ->
-                wellnessViewModel.changeTaskChecked(task, checked)
-            },
-            onCloseTask = { task ->
-                wellnessViewModel.remove(task)
+        Row(modifier = modifier.padding(start = 16.dp)) {
+            Button(
+                onClick = { route = "main" },
+                modifier = modifier
+            ) {
+                Text(text = "主页")
             }
-        )
+            Button(
+                onClick = { route = "list1" },
+                modifier = modifier.padding(start = 10.dp)
+            ) {
+                Text(text = "列表1")
+            }
+            Button(
+                onClick = { showList = !showList },
+                modifier = modifier.padding(start = 10.dp)
+            ) {
+                Text(text = "${if (showList) "隐藏" else "显示"}列表2")
+            }
+        }
+        if (!showList) {
+            when (route) {
+                "main" -> MainScreen(modifier)
+                //点击切换时不会保存状态，因为数据赋值在列表的组合项内
+                "list1" -> WellnessTaskList(modifier)
+            }
+        } else {
+            if (tasks != null && onClose != null)
+                WellnessTaskList(tasks, onCheckedChange, onClose, modifier)
+        }
     }
 }
 
-@Composable
-fun WellnessScreenStart( wellnessViewModel: WellnessViewModel = viewModel()) {
-    WellnessTasksList( list = wellnessViewModel.tasks,
-        onCloseTask = { wellnessViewModel.remove(it) },
-        onCheckedTask = { task, isChecked ->
-            wellnessViewModel.changeTaskChange(task, isChecked)
-        }
-    )
-}
 
+/**
+ * 主页组合
+ *父类约束条件会传入子类约束。可以不定义布局
+ *当提高可组合项的重用，建议添加在可组合项内添加容器，有时候不确定父类容器的约束
+ */
 @Composable
-fun WellnessScreen1(modifier: Modifier = Modifier) {
-    // WaterCounter(modifier = modifier)
+fun MainScreen(modifier: Modifier = Modifier) {
     Column {
-        StatefulCounter()
-        val list = remember {
-            Data.getWellnessTasks().toMutableStateList()
-        }
-        WellnessTasksList(list = list) {
-            list.remove(it)
-        }
-    }
-}
-
-@Composable
-fun WaterCounter(modifier: Modifier) {
-    //var count = 0
-    var count by remember {
-        mutableStateOf(0)
-    }
-    Column(modifier = modifier.padding(16.dp)) {
-        if (count > 0) {
-            Text("You've had $count glasses.")
-        }
-        Button(
-            onClick = { count++ },
-            enabled = count < 10,
-            modifier = modifier.padding(top = 6.dp)
-        ) {
-            Text(text = "Add One")
-        }
-    }
-}
-
-
-@Composable
-fun StatelessCounter(count: Int, onIncClick: () -> Unit, modifier: Modifier = Modifier) {
-    Column(modifier = modifier.padding(16.dp)) {
-        if (count > 0) {
-            Text("You've had $count glasses.")
-        }
-        Button(
-            onClick = onIncClick,
-            enabled = count < 10,
-            modifier = modifier.padding(top = 6.dp)
-        ) {
-            Text(text = "Add One")
-        }
-    }
-}
-
-@Composable
-fun StatefulCounter() {
-    var count by remember {
-        mutableStateOf(0)
-    }
-    StatelessCounter(count = count, onIncClick = { count++ })
-
-    StatelessCounter(count = count, onIncClick = { count *= 2 })
-}
-
-@Composable
-fun WaterCounter2(modifier: Modifier) {
-    //var count = 0
-    var count by remember {
-        mutableStateOf(0)
-    }
-    Column(modifier = modifier.padding(16.dp)) {
-        if (count > 0) {
-            var showTask by remember {
-                mutableStateOf(true)
-            }
-            if (showTask) {
-                WellnessTaskItem2(task = "Have you taken your 15 minute walk today?",
-                    onClose = { showTask = false })
-            }
-            Text("You've had $count glasses.")
-        }
-        Row(modifier = modifier.padding(top = 6.dp)) {
-            Button(
-                onClick = { count++ },
-                enabled = count < 10
-            ) {
-                Text(text = "Add One")
-            }
-            Button(
-                onClick = { count = 0 },
-                modifier = modifier.padding(start = 6.dp),
-            ) {
-                Text("Clear water count")
-            }
-        }
-
-    }
-}
-
-@Composable
-fun WellnessTaskItem2(
-    task: String,
-    onClose: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Text(
-            text = task, modifier = modifier
-                .weight(1f)
-                .padding(start = 16.dp)
+        Divider(
+            modifier = modifier
+                .height(6.dp)
+                .fillMaxWidth()
         )
-        IconButton(onClick = onClose) {
-            Icon(Icons.Filled.Close, contentDescription = "Close")
-        }
-    }
-}
-
-
-@Composable
-fun WellnessTaskItem(modifier: Modifier = Modifier, task: String, onClose: () -> Unit) {
-    var checkedState by rememberSaveable {
-        mutableStateOf(false)
-    }
-    WellnessTaskItem(
-        task = task,
-        checked = checkedState,
-        onCheckedChange = { checkedState = !checkedState },
-        onClose = onClose
-    )
-}
-
-@Composable
-fun WellnessTaskItem(task: String, modifier: Modifier = Modifier) {
-    var checkedState by rememberSaveable {
-        mutableStateOf(false)
-    }
-    WellnessTaskItem(
-        task = task,
-        checked = checkedState,
-        onCheckedChange = { checkedState = !checkedState },
-        onClose = { })
-}
-
-@Composable
-fun WellnessTaskItem(
-    task: String,
-    checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit,
-    onClose: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Text(
-            text = task, modifier = modifier
-                .weight(1f)
-                .padding(start = 16.dp)
+        WaterCounter(modifier)
+        Divider(
+            modifier = modifier
+                .height(6.dp)
+                .fillMaxWidth()
         )
-        Checkbox(checked = checked, onCheckedChange = onCheckedChange)
-        IconButton(onClick = onClose) {
-            Icon(Icons.Filled.Close, contentDescription = "Close")
-        }
+        StatefulCounter(modifier)
+        Divider(
+            modifier = modifier
+                .height(6.dp)
+                .fillMaxWidth()
+        )
     }
+
 }
+
+
+

@@ -1,4 +1,4 @@
-package com.codelabs.state.test
+package com.xxh.sample.state.codelabs
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,6 +15,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+/**
+ * 代码示例
+ */
 @Composable
 fun WaterCounter(modifier: Modifier = Modifier) {
     var count by remember {
@@ -22,6 +25,7 @@ fun WaterCounter(modifier: Modifier = Modifier) {
     }
     Column(modifier = modifier.padding(16.dp)) {
         if (count > 0) {
+            //控制task的显示隐藏
             var showTask by remember {
                 mutableStateOf(true)
             }
@@ -65,6 +69,9 @@ fun WaterCounter(modifier: Modifier = Modifier) {
     }
 }
 
+/**
+ * 状态提升
+ */
 @Composable
 fun StatelessCounter(count: Int, onIncrement: () -> Unit, modifier: Modifier = Modifier) {
 
@@ -83,7 +90,9 @@ fun StatelessCounter(count: Int, onIncrement: () -> Unit, modifier: Modifier = M
     }
 }
 
-
+/**
+ * 处理状态提升的可组合项
+ */
 @Composable
 fun StatefulCounter(modifier: Modifier = Modifier) {
     //共享状态

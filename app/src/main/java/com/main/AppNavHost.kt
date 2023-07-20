@@ -19,7 +19,6 @@ import com.codelabs.animation.AnimationActivity
 import com.codelabs.basiclayouts.BasicLayoutsActivity
 import com.codelabs.basics.BasicActivity
 import com.codelabs.state.StateActivity
-import com.codelabs.state.test.StateTestActivity
 import com.codelabs.theming.ui.start.ThemeStartActivity
 import com.common.ListScreen
 import com.common.ListScreenMsg
