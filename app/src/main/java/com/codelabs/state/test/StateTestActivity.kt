@@ -21,7 +21,8 @@ class StateTestActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     //val wellnessViewModel: WellnessViewModel by viewModels()
-                    WellnessScreen()
+                   // WellnessScreen()
+                   WellnessScreen2()
                 }
             }
         }

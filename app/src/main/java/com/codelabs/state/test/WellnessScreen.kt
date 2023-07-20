@@ -1,6 +1,5 @@
 package com.codelabs.state.test
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -39,42 +38,111 @@ fun WellnessScreen(
     modifier: Modifier = Modifier
 ) {
     Column(modifier) {
-        var showList1 by remember {
-            mutableStateOf(false)
+
+        //控制切换主页和list1
+        var route by remember {
+            mutableStateOf("main")
         }
-        var showList2 by remember {
+
+        //控制显示隐藏list2
+        var showList by remember {
             mutableStateOf(false)
         }
         Row(modifier = modifier.padding(start = 16.dp)) {
             Button(
-                onClick = { showList1 = !showList1 },
+                onClick = { route = "main" },
                 modifier = modifier
             ) {
-                Text(text = "${if (showList1) "隐藏" else "显示"} +列表1")
+                // Text(text = "${if (showList1) "隐藏" else "显示"}列表1")
+                Text(text = "主页")
             }
 
             Button(
-                onClick = { showList2 = !showList2 },
+                onClick = { route = "list1" },
                 modifier = modifier.padding(start = 10.dp)
             ) {
-                Text(text = "${if (showList2) "隐藏" else "显示"} +列表2")
+                // Text(text = "${if (showList1) "隐藏" else "显示"}列表1")
+                Text(text = "列表1")
+            }
+
+            Button(
+                onClick = { showList = !showList },
+                modifier = modifier.padding(start = 10.dp)
+            ) {
+                Text(text = "${if (showList) "隐藏" else "显示"}列表2")
             }
         }
 
-        if (showList2) {
+        if (!showList) {
+            when (route) {
+                "main" -> MainScreen(modifier)
+                //点击切换时不会保存状态，因为数据赋值在列表的组合项内
+                "list1" -> WellnessTaskList(modifier)
+            }
+        } else {
             if (tasks != null && onClose != null)
                 WellnessTaskList(tasks, onCheckedChange, onClose, modifier)
-        }else{
-            MainScreen(modifier)
         }
-
-       /* if (showList1) {
-            WellnessTaskList(modifier)
-        }*/
-
     }
 }
 
+
+/**
+ * 状态提升，封装为状态容器
+ */
+@Composable
+fun WellnessScreen2(
+    wellnessViewModel: WellnessViewModel = viewModel(),
+    wellnessState: WellnessState = rememberWellnessState(),
+    modifier: Modifier = Modifier
+) {
+    Column(modifier) {
+        Row(modifier = modifier.padding(start = 16.dp)) {
+            Button(
+                onClick = { wellnessState.routeState.value = "main" },
+                modifier = modifier
+            ) {
+                // Text(text = "${if (showList1) "隐藏" else "显示"}列表1")
+                Text(text = "主页")
+            }
+
+            Button(
+                onClick = { wellnessState.routeState.value = "list1" },
+                modifier = modifier.padding(start = 10.dp)
+            ) {
+                // Text(text = "${if (showList1) "隐藏" else "显示"}列表1")
+                Text(text = "列表1")
+            }
+
+            Button(
+                onClick = { wellnessState.showState.value = !wellnessState.showState.value },
+                modifier = modifier.padding(start = 10.dp)
+            ) {
+                Text(text = "${wellnessState.testChange()}列表2")
+            }
+        }
+
+        wellnessState.handle(showMain = {
+            MainScreen(modifier)
+        }, showList1 = {
+            //点击切换时不会保存状态，因为数据赋值在列表的组合项内
+            WellnessTaskList(modifier)
+        }) {
+            WellnessTaskList(
+                wellnessViewModel.taskData,
+                wellnessViewModel::checkedHint,
+                wellnessViewModel::onCloseTask,
+                modifier
+            )
+        }
+    }
+}
+
+
+/**
+ *父类约束条件会传入子类约束。可以不定义布局
+ *当提高可组合项的重用，建议添加在可组合项内添加容器，有时候不确定父类容器的约束
+ */
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
     Column {

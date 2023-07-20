@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun WellnessTaskList(modifier: Modifier = Modifier) {
-    val taskDataState = tasks.toMutableStateList()
+    val taskDataState = tasks1.toMutableStateList()
     WellnessTaskList(tasks = taskDataState, onClose = { taskDataState.remove(it) })
 }
 
