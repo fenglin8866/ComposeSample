@@ -1,11 +1,10 @@
-package com.xxh.sample.state
+package com.xxh.sample.state.blog
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -36,8 +35,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.xxh.sample.R
-import com.xxh.sample.data.Message
-import com.xxh.sample.data.SampleData
+import com.xxh.sample.common.data.Message
+import com.xxh.sample.common.data.SampleData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

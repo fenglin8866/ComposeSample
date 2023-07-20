@@ -29,7 +29,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.xxh.sample.R
-import com.xxh.sample.data.Message
+import com.xxh.sample.common.data.Message
 
 
 @Composable

@@ -1,4 +1,4 @@
-package com.xxh.sample.state.test1
+package com.xxh.sample.state.blog
 
 import androidx.lifecycle.ViewModel
 

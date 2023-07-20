@@ -17,7 +17,7 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.xxh.sample.data.Message
+import com.xxh.sample.common.data.Message
 import com.xxh.sample.R
 
 

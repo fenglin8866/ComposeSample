@@ -1,4 +1,4 @@
-package com.xxh.sample.data
+package com.xxh.sample.common.data
 
 object SampleData {
     // Sample conversation data

@@ -20,7 +20,7 @@ import com.xxh.sample.TestDestination.NAVIGATION_ROUTE
 import com.xxh.sample.TestDestination.PROPERTY_ROUTE
 import com.xxh.sample.TestDestination.STATE_ROUTE
 import com.xxh.sample.TestDestination.THEMING_ROUTE
-import com.xxh.sample.state.ConversationScreen
+import com.xxh.sample.state.blog.ConversationScreen
 import com.xxh.sample.animation.AnimScreen
 import com.xxh.sample.basics.BasicsScreen
 import com.xxh.sample.component.ComponentScreen

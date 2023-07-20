@@ -10,6 +10,8 @@ import com.xxh.sample.state.StateDestination.BLOG_ROUTE
 import com.xxh.sample.state.StateDestination.CODELAB_ROUTE
 import com.xxh.sample.state.StateDestination.DEV_ROUTE
 import com.xxh.sample.state.StateDestination.HOME_ROUTE
+import com.xxh.sample.state.basic.StateBasicScreen
+import com.xxh.sample.state.blog.ConversationScreen
 import com.xxh.sample.state.codelabs.WellnessScreen2
 
 
@@ -33,7 +35,7 @@ fun StateNavGraph(navController: NavHostController) {
             }
         }
         composable(DEV_ROUTE) {
-            HelloContent()
+            StateBasicScreen()
         }
         composable(CODELAB_ROUTE) {
             WellnessScreen2()
