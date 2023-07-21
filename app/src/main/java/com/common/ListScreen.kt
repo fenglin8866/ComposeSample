@@ -11,7 +11,9 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.main.data.HomeData
 import com.main.data.HomeMsg
 
 /**
@@ -109,5 +111,12 @@ fun ListItem(title: String, click: (String) -> Unit) {
                 .padding(vertical = 10.dp)
                 .wrapContentSize()
         )
+    }
+}
+@Preview
+@Composable
+fun test(){
+    ListScreenMsg(data = HomeData.conversationSample) {
+        //clickCodelabs(it, context)
     }
 }
