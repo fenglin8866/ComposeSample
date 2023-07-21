@@ -47,7 +47,6 @@ fun HelloContent() {
 
 @Composable
 fun HelloScreen() {
-
     var name by remember { mutableStateOf("") }
     HelloContent(name) { newValue ->
         name = newValue
