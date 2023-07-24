@@ -1,10 +1,11 @@
-package com.xxh.sample.state.blog
+package com.xxh.sample.state.basic
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,17 +24,19 @@ import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.xxh.sample.R
 import com.xxh.sample.common.data.Message
 import com.xxh.sample.common.data.SampleData
@@ -41,57 +44,52 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
-/*@Composable
-private fun ConversationScreen(
-    conversationViewModel: ConversationViewModel = viewModel()
-) {
 
-    val messages by conversationViewModel.messages.collectAsStateWithLifecycle()
-
-    ConversationScreen(messages, { message -> conversationViewModel.sendMessage(message) })
-
-}*/
-
-// in Compose
-
-/*@Composable
-private fun ConversationScreen(
-    conversationViewModel = viewModel()
+@Composable
+fun ConversationScreen(
+    viewModel: ConversationViewModel = viewModel()
 ) {
 
     val scope = rememberCoroutineScope()
+    val messages by viewModel.messages.collectAsStateWithLifecycle()
+    ConversationScreen(messages = messages,
+        onSendMessage = { message -> viewModel.sendMessage(message) },
+        onCloseDrawer = { viewModel.closeDrawer(uiScope = scope) })
 
-    ConversationScreen(onCloseDrawer = { viewModel.closeDrawer(uiScope = scope) })
-
-}*/
+}
 
 
-/*@Composable
-private fun ConversationScreen(
-    messages: List<Messages>, onSendMessage: (Message) -> Unit)
+@Composable
+fun ConversationScreen(
+    messages: List<Message>,
+    onSendMessage: (Message) -> Unit,
+    onCloseDrawer: () -> Unit
 ) {
 
-    MessagesList(messages, onSendMessage)
-    // ...
-}*/
+}
+
 
 
 
 @Composable
 fun ConversationScreen() {
     val scope = rememberCoroutineScope()
-    val lazyListState = rememberLazyListState() // State hoisted to the ConversationScreen
-    Column {
-        MessagesList(SampleData.conversationSample, lazyListState,scope) // Reuse same state in MessageList
 
-        /*UserInput(
-            onMessageSent = { // Apply UI logic to lazyListState
-                scope.launch {
-                    lazyListState.scrollToItem(0)
-                }
-            },
-        )*/
-    }
+    val lazyListState = rememberLazyListState() // State hoisted to the ConversationScreen
+
+    MessagesList(
+        SampleData.conversationSample,
+        lazyListState,
+        scope
+    ) // Reuse same state in MessageList
+
+    UserInput(
+        onMessageSent = { // Apply UI logic to lazyListState
+            scope.launch {
+                lazyListState.scrollToItem(0)
+            }
+        },
+    )
 
 }
 
@@ -100,7 +98,8 @@ private fun UserInput(onMessageSent: () -> Unit) {
     var name by remember {
         mutableStateOf("")
     }
-    TextField(value = name, onValueChange = { name = it })
+    //TextField(value = name, onValueChange = { name = it })
+    Text(text = "xxxxxxxxxx")
 }
 
 @Composable
@@ -109,7 +108,7 @@ private fun MessagesList(
     lazyListState: LazyListState = rememberLazyListState(),// LazyListState has a default value
     scope: CoroutineScope
 ) {
-    Column(Modifier.fillMaxSize()){
+    Box(Modifier.fillMaxSize().padding(bottom = 40.dp), contentAlignment = Alignment.BottomCenter) {
         LazyColumn(
             state = lazyListState // Pass hoisted state to LazyColumn
         ) {
@@ -120,16 +119,21 @@ private fun MessagesList(
 
         JumpToBottom(onClicked = {
             scope.launch {
-                lazyListState.scrollToItem(messages.size-1) // UI logic being applied to lazyListState
+                lazyListState.scrollToItem(messages.size - 1) // UI logic being applied to lazyListState
+//                lazyListState.scrollToItem(0) // UI logic being applied to lazyListState
             }
         })
     }
 }
 
 @Composable
-private fun JumpToBottom(onClicked:()->Unit){
-    Button(onClick = onClicked, modifier = Modifier.wrapContentSize()) {
-        Text(text = "点击滚动到底部")
+private fun JumpToBottom(onClicked: () -> Unit) {
+    Button(
+        onClick = onClicked, modifier = Modifier
+            .wrapContentSize()
+            .padding(bottom = 20.dp)
+    ) {
+        Text(text = "Jump To Bottom")
     }
 }
 
