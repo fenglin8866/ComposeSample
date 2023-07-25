@@ -68,9 +68,6 @@ fun ConversationScreen(
 
 }
 
-
-
-
 @Composable
 fun ConversationScreen() {
     val scope = rememberCoroutineScope()
@@ -99,7 +96,7 @@ private fun UserInput(onMessageSent: () -> Unit) {
         mutableStateOf("")
     }
     //TextField(value = name, onValueChange = { name = it })
-    Text(text = "xxxxxxxxxx")
+   // Text(text = "xxxxxxxxxx")
 }
 
 @Composable
