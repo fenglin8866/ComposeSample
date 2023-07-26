@@ -370,6 +370,7 @@
     <string name="open_context_menu">Open context menu</string>
     <plurals name="fruit_title">
         <item quantity="one">fruit</item>
+        <item quantity="other">fruit</item>
     </plurals>
     <plurals name="runtime_format">
         <item quantity="one">%1$d minute</item>
