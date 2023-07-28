@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 /**
@@ -19,6 +20,12 @@ fun CompositionLocalReplace() {
 @Composable
 fun MyDescendant(data: String) {
     // Display data
+}
+
+class MyViewModel : ViewModel() {
+    fun loadData() {
+
+    }
 }
 
 @Composable
