@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -104,6 +105,11 @@ fun LocalElevationsSample() {
                 )
             }
 
+            Button(onClick = { /*TODO*/ }) {
+                Log.d("LocalElevationsSample", "CompositionLocalProvider Button ")
+                Text(text = "test")
+            }
+
             Column(modifier = Modifier.padding(10.dp)) {
                 Log.d("LocalElevationsSample", "CompositionLocalProvider4")
                 Column {
@@ -140,13 +146,20 @@ val LocalElevations = compositionLocalOf {
 
 compositionLocalOf
 在重组期间更改提供的值只会使读取其current值的内容无效
-15:23:27.989  D  CompositionLocalProvider2
-15:23:27.991  D  CompositionLocalProvider4
+19:12:00.270 LocalElevationsSample    D  CompositionLocalProvider2
+19:12:00.277 LocalElevationsSample    D  CompositionLocalProvider4
+19:12:00.278 LocalElevationsSample    D  CompositionLocalProvider5
+19:12:00.279 LocalElevationsSample    D  CompositionLocalProvider6
+19:12:00.279 LocalElevationsSample    D  CompositionLocalProvider7
 
 staticCompositionLocalOf
 与compositionLocalOf不同，Compose不会跟踪staticCompositionLocalOf的读取。更改该值会导致提供CompositionLocal的整个contentlambda被重组，而不仅仅是在组合中读取current值的位置。
 如果为CompositionLocal提供的值发生更改的可能性微乎其微或永远不会更改，使用staticCompositionLocalOf可提高性能。
-15:20:44.354  D  CompositionLocalProvider2
-15:20:44.356  D  CompositionLocalProvider3
-15:20:44.358  D  CompositionLocalProvider4
+19:12:00.270 LocalElevationsSample    D  CompositionLocalProvider2
+19:12:00.273 LocalElevationsSample    D  CompositionLocalProvider3
+19:12:00.276 LocalElevationsSample    D  CompositionLocalProvider Button
+19:12:00.277 LocalElevationsSample    D  CompositionLocalProvider4
+19:12:00.278 LocalElevationsSample    D  CompositionLocalProvider5
+19:12:00.279 LocalElevationsSample    D  CompositionLocalProvider6
+19:12:00.279 LocalElevationsSample    D  CompositionLocalProvider7
 */

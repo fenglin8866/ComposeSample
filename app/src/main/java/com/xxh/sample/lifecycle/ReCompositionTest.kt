@@ -1,4 +1,4 @@
-package com.xxh.sample.others.compositionlocal
+package com.xxh.sample.lifecycle
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -44,7 +44,6 @@ fun ReCompositionTest() {
         cardEle = text.toInt()
     })*/
    // Text(text)
-
 
     Row {
         Card(
@@ -123,6 +122,7 @@ fun ReCompositionTest() {
     }){
         Text("change")
     }
+
     Column {
         var text2 by remember {
             mutableStateOf("aa")

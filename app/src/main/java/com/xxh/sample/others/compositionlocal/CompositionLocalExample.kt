@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import com.xxh.sample.R
 import com.xxh.sample.common.component.XDivider
+import com.xxh.sample.lifecycle.ReCompositionTest
 
 
 @Composable
@@ -22,8 +23,7 @@ fun CompositionLocalScreen() {
         XDivider()
         FruitText(2)
         XDivider()
-        //LocalElevationsSample()
-        ReCompositionTest()
+        LocalElevationsSample()
     }
 }
 
