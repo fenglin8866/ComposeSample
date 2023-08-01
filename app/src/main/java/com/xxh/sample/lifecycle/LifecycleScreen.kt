@@ -1,15 +1,15 @@
 package com.xxh.sample.lifecycle
 
 import android.util.Log
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -19,13 +19,98 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.xxh.sample.common.component.XInput
 
 @Composable
 fun LifecycleScreen() {
+    Column {
+        HelloContent10()
+        /* HelloContent11()
+         HelloContent12()
 
+         Log.d("LifecycleScreen", "LifecycleScreen0")
+         HelloContentA()
+         HelloContentB()
+
+         Log.d("LifecycleScreen", "LifecycleScreen1")
+         HelloContent3()
+         Log.d("LifecycleScreen", "LifecycleScreen2")
+         HelloContent4()
+         Log.d("LifecycleScreen", "LifecycleScreen3")
+
+         SideEffect {
+             Log.d("LifecycleScreen", "LifecycleScreen SideEffect")
+         }
+         LaunchedEffect(true) {
+             Log.d("LifecycleScreen", "LifecycleScreen LaunchedEffect")
+         }
+         DisposableEffect(true) {
+             Log.d("LifecycleScreen", "LifecycleScreen DisposableEffect")
+             onDispose {
+                 Log.d("LifecycleScreen", "LifecycleScreen DisposableEffect onDispose")
+             }
+         }*/
+    }
+}
+
+
+@Composable
+fun HelloContent10() {
+
+    var text by remember {
+        mutableStateOf("")
+    }
+
+    Column {
+        Surface {
+            var cardEle by remember {
+                mutableIntStateOf(10)
+            }
+            Surface {
+                Column {
+                    XInput(text, onValueChange = { text = it }, doClick = {
+                        cardEle = text.toInt()
+                    })
+                    Button(onClick = { }) {
+                        Text(text = "button")
+                        Log.d("LifecycleScreen", "LifecycleScreenX1 Button card=$cardEle")
+                        // Log.d("LifecycleScreen", "LifecycleScreenX Button card=$cardEle")
+                    }
+                }
+            }
+        }
+
+        Column {
+            Text(text = "testX")
+            Log.d("LifecycleScreen", "LifecycleScreenX")
+            Button(onClick = { /*TODO*/ }) {
+                Text(text = "button")
+                // Log.d("LifecycleScreen", "LifecycleScreenX2 Button card=$cardEle")
+                // Log.d("LifecycleScreen", "LifecycleScreenX Button card=$cardEle")
+            }
+        }
+        Log.d("LifecycleScreen", "LifecycleScreenY")
+    }
+
+}
+
+
+/**
+ * 10:02:29.896 LifecycleScreen          D  LifecycleScreenX
+ * 10:02:29.897 LifecycleScreen          D  LifecycleScreenX Button card=10
+ * 10:02:29.897 LifecycleScreen          D  LifecycleScreenY
+ *==================================================================
+ * 10:02:48.758 LifecycleScreen          D  LifecycleScreenX
+ * 10:02:48.759 LifecycleScreen          D  LifecycleScreenX Button card=10
+ * 10:02:48.759 LifecycleScreen          D  LifecycleScreenY
+ *================================================================
+ * 10:02:55.089 LifecycleScreen          D  LifecycleScreenX Button card=3
+ */
+@Composable
+fun HelloContent11() {
     var text by remember {
         mutableStateOf("")
     }
@@ -34,49 +119,68 @@ fun LifecycleScreen() {
         mutableIntStateOf(10)
     }
     Column {
+
         XInput(text, onValueChange = { text = it }, doClick = {
             cardEle = text.toInt()
         })
 
+        Surface {
+            XInput(text, onValueChange = { text = it }, doClick = {
+                cardEle = text.toInt()
+            })
+        }
+
+        XInput()
+
         Column {
             Text(text = "testX")
-            Log.d("LifecycleScreen","LifecycleScreenX")
+            Log.d("LifecycleScreen", "LifecycleScreenX")
             Button(onClick = { /*TODO*/ }) {
                 Text(text = "button")
-                Log.d("LifecycleScreen","LifecycleScreenX Button card=$cardEle")
+                Log.d("LifecycleScreen", "LifecycleScreenX Button card=$cardEle")
+                // Log.d("LifecycleScreen", "LifecycleScreenX Button card=$cardEle")
             }
         }
-        Log.d("LifecycleScreen","LifecycleScreenY")
+        Log.d("LifecycleScreen", "LifecycleScreenY")
+    }
+}
+
+/**
+ * 10:12:05.718 LifecycleScreen          D  LifecycleScreenX
+ * 10:12:05.720 LifecycleScreen          D  LifecycleScreenX Button card=10
+ * 10:12:05.720 LifecycleScreen          D  LifecycleScreenY
+ *
+ *
+ * 10:12:15.372 LifecycleScreen          D  LifecycleScreenX
+ * 10:12:15.373 LifecycleScreen          D  LifecycleScreenX Button card=10
+ * 10:12:15.373 LifecycleScreen          D  LifecycleScreenY
+ */
+@Composable
+fun HelloContent12() {
+    var text by remember {
+        mutableStateOf("")
     }
 
-
-    /* Column {
-         Log.d("LifecycleScreen", "LifecycleScreen0")
-         HelloContentA()
-         HelloContentB()
-     }*/
-
-    /* Log.d("LifecycleScreen","LifecycleScreen0")
-     Column {
-         Log.d("LifecycleScreen","LifecycleScreen1")
-         HelloContent3()
-         Log.d("LifecycleScreen","LifecycleScreen2")
-         HelloContent4()
-         Log.d("LifecycleScreen","LifecycleScreen3")
-
-         SideEffect {
-             Log.d("LifecycleScreen","LifecycleScreen SideEffect")
-         }
-         LaunchedEffect(true){
-             Log.d("LifecycleScreen","LifecycleScreen LaunchedEffect")
-         }
-         DisposableEffect(true){
-             Log.d("LifecycleScreen","LifecycleScreen DisposableEffect")
-             onDispose {
-                 Log.d("LifecycleScreen","LifecycleScreen DisposableEffect onDispose")
-             }
-         }
-     }*/
+    var cardEle by remember {
+        mutableIntStateOf(10)
+    }
+    Column {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(2.dp)
+        ) {
+            TextField(value = text, onValueChange = { text = it }, modifier = Modifier.weight(1.0F))
+        }
+        Column {
+            Text(text = "testX")
+            Log.d("LifecycleScreen", "LifecycleScreenX")
+            Button(onClick = { }) {
+                Text(text = "button")
+                Log.d("LifecycleScreen", "LifecycleScreenX Button card=$cardEle")
+            }
+        }
+        Log.d("LifecycleScreen", "LifecycleScreenY")
+    }
 }
 
 
@@ -118,7 +222,7 @@ fun HelloContentA() {
             }
             Log.d("LifecycleScreen", "HelloContentA name2=$name")
 
-            XChange{
+            XChange {
                 Log.d("LifecycleScreen", "HelloContentA XChange name=")
             }
         }
@@ -185,7 +289,7 @@ fun HelloContent3() {
             Text(
                 text = "Hello, $name!",
                 modifier = Modifier.padding(bottom = 8.dp),
-                style = MaterialTheme.typography.h5
+                style = MaterialTheme.typography.bodyMedium
             )
         }
         OutlinedTextField(
@@ -235,7 +339,7 @@ fun HelloContent4() {
             Text(
                 text = "Hello, $name!",
                 modifier = Modifier.padding(bottom = 8.dp),
-                style = MaterialTheme.typography.h5
+                style = MaterialTheme.typography.bodyMedium
             )
         }
         OutlinedTextField(
