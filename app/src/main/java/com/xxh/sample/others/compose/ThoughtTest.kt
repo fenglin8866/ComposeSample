@@ -18,6 +18,8 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.HomeMax
+import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -28,6 +30,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -46,54 +49,7 @@ import com.xxh.sample.R
 class ThoughtTest {
 }
 
-@Composable
-fun ListWithBug(myList: List<String>) {
-    var items = 0
 
-    Row(horizontalArrangement = Arrangement.SpaceBetween) {
-        Column {
-            for (item in myList) {
-                Text("Item: $item")
-                items++ // Avoid! Side-effect of the column recomposing.
-            }
-        }
-        Text("Count: $items")
-    }
-}
-
-
-/**
- * Display a list of names the user can click with a header
- */
-@Composable
-fun NamePicker(
-    header: String,
-    names: List<String>,
-    onNameClicked: (String) -> Unit
-) {
-    Column {
-        // this will recompose when [header] changes, but not when [names] changes
-        Text(header, style = MaterialTheme.typography.bodyMedium)
-        Divider()
-        // LazyColumn is the Compose version of a RecyclerView.
-        // The lambda passed to items() is similar to a RecyclerView.ViewHolder.
-        LazyColumn {
-            items(names) { name ->
-                // When an item's [name] updates, the adapter for that item
-                // will recompose. This will not recompose when [header] changes
-                NamePickerItem(name, onNameClicked)
-            }
-        }
-    }
-}
-
-/**
- * Display a single name the user can click.
- */
-@Composable
-private fun NamePickerItem(name: String, onClicked: (String) -> Unit) {
-    Text(name, Modifier.clickable(onClick = { onClicked(name) }))
-}
 
 @Composable
 private fun StateRead(modifier: Modifier = Modifier) {
@@ -203,6 +159,7 @@ private fun StateRead(modifier: Modifier = Modifier) {
 
 }
 
+//================================构建界面的代码示例Start============================================
 
 /**
  * 定义一个更通用的 MyAppTopAppBar 可组合项，有利于重用
@@ -233,4 +190,100 @@ fun MyAppTopAppBar(topAppBarText: String, onBackPressed: () -> Unit) {
 }
 
 
+@Composable
+fun LoginScreen(viewModel: LoginViewModel) {
+    val uiState = viewModel.uiState2.observeAsState()
 
+}
+
+//================================构建界面的代码示例End============================================
+
+
+//================================Compose 编程思想============================================
+@Composable
+fun Greeting(names: List<String>) {
+    for (name in names) {
+        Text("Hello $name")
+    }
+}
+
+@Composable
+fun ClickCounter(clicks: Int, onClick: () -> Unit) {
+    Button(onClick = onClick) {
+        Text("I've been clicked $clicks times")
+    }
+}
+
+@Composable
+fun SharedPrefsToggle(
+    text: String,
+    value: Boolean,
+    onValueChanged: (Boolean) -> Unit
+) {
+    Row {
+        Text(text)
+        Checkbox(checked = value, onCheckedChange = onValueChanged)
+    }
+}
+
+@Composable
+fun ListComposable(myList: List<String>) {
+    Row(horizontalArrangement = Arrangement.SpaceBetween) {
+        Column {
+            for (item in myList) {
+                Text("Item: $item")
+            }
+        }
+        Text("Count: ${myList.size}")
+    }
+}
+
+@Composable
+@Deprecated("Example with bug")
+fun ListWithBug(myList: List<String>) {
+    var items = 0
+
+    Row(horizontalArrangement = Arrangement.SpaceBetween) {
+        Column {
+            for (item in myList) {
+                Text("Item: $item")
+                items++ // Avoid! Side-effect of the column recomposing.
+            }
+        }
+        Text("Count: $items")
+    }
+}
+
+
+/**
+ * Display a list of names the user can click with a header
+ */
+@Composable
+fun NamePicker(
+    header: String,
+    names: List<String>,
+    onNameClicked: (String) -> Unit
+) {
+    Column {
+        // this will recompose when [header] changes, but not when [names] changes
+        Text(header, style = MaterialTheme.typography.bodyMedium)
+        Divider()
+        // LazyColumn is the Compose version of a RecyclerView.
+        // The lambda passed to items() is similar to a RecyclerView.ViewHolder.
+        LazyColumn {
+            items(names) { name ->
+                // When an item's [name] updates, the adapter for that item
+                // will recompose. This will not recompose when [header] changes
+                NamePickerItem(name, onNameClicked)
+            }
+        }
+    }
+}
+
+/**
+ * Display a single name the user can click.
+ */
+@Composable
+private fun NamePickerItem(name: String, onClicked: (String) -> Unit) {
+    Text(name, Modifier.clickable(onClick = { onClicked(name) }))
+}
