@@ -1,4 +1,4 @@
-package com.xxh.sample.others.compose
+package com.xxh.sample.basics.framework
 
 import androidx.compose.animation.Animatable
 import androidx.compose.animation.animateColorAsState

@@ -33,7 +33,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,6 +45,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.xxh.sample.R
+import com.xxh.sample.basics.udf.LoginViewModel
 
 class ThoughtTest {
 }
@@ -162,40 +162,7 @@ private fun StateRead(modifier: Modifier = Modifier) {
 
 //================================构建界面的代码示例Start============================================
 
-/**
- * 定义一个更通用的 MyAppTopAppBar 可组合项，有利于重用
- */
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun MyAppTopAppBar(topAppBarText: String, onBackPressed: () -> Unit) {
-    TopAppBar(
-        title = {
-            Text(
-                text = topAppBarText,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .wrapContentSize(Alignment.Center)
-            )
-        },
-        navigationIcon = {
-            IconButton(onClick = onBackPressed) {
-                Icon(
-                    Icons.Filled.ArrowBack,
-                    contentDescription = "localizedString"
-                )
-            }
-        },
-        // ...
-    )
-}
 
-
-@Composable
-fun LoginScreen(viewModel: LoginViewModel) {
-    val uiState = viewModel.uiState2.observeAsState()
-
-}
 
 //================================构建界面的代码示例End============================================
 

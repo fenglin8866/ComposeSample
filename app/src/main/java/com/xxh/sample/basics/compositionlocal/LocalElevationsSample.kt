@@ -1,4 +1,4 @@
-package com.xxh.sample.others.compositionlocal
+package com.xxh.sample.basics.compositionlocal
 
 import android.util.Log
 import androidx.compose.foundation.background

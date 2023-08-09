@@ -1,4 +1,4 @@
-package com.xxh.sample.others.compositionlocal
+package com.xxh.sample.basics.compositionlocal
 
 import android.util.Log
 import androidx.compose.foundation.layout.Column
@@ -13,7 +13,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import com.xxh.sample.R
 import com.xxh.sample.common.component.XDivider
-import com.xxh.sample.lifecycle.ReCompositionTest
 
 
 @Composable

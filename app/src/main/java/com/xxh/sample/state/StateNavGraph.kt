@@ -11,7 +11,6 @@ import com.xxh.sample.state.StateDestination.CODELAB_ROUTE
 import com.xxh.sample.state.StateDestination.DEV_ROUTE
 import com.xxh.sample.state.StateDestination.HOME_ROUTE
 import com.xxh.sample.state.basic.StateBasicScreen
-import com.xxh.sample.state.basic.ConversationScreen
 import com.xxh.sample.state.blog.BlogScreen
 import com.xxh.sample.state.codelabs.WellnessScreen2
 

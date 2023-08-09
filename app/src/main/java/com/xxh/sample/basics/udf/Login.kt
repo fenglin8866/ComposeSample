@@ -1,4 +1,4 @@
-package com.xxh.sample.others.compose
+package com.xxh.sample.basics.udf
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
