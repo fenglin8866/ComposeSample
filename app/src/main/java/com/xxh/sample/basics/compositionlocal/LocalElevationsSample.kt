@@ -56,53 +56,64 @@ fun LocalElevationsSample() {
     }
     CompositionLocalProvider(LocalElevations provides elevations) {
         Card(
-            backgroundColor = MaterialTheme.colors.onError,
-            elevation = LocalElevations.current.card,
-            modifier = Modifier
-                .size(115.dp)
-                .padding(4.dp)
+                backgroundColor = MaterialTheme.colors.onError,
+                elevation = LocalElevations.current.card,
+                modifier = Modifier
+                        .size(115.dp)
+                        .padding(4.dp)
         ) {
             Log.d("LocalElevationsSample", "CompositionLocalProvider1")
             // Content
             Text("测试", modifier = Modifier.fillMaxSize(), textAlign = TextAlign.Center)
         }
-    }
 
-    Row {
-        Card(
+    }
+    Card(
             backgroundColor = MaterialTheme.colors.onError,
             elevation = LocalElevations.current.card,
             modifier = Modifier
-                .size(115.dp)
-                .padding(4.dp)
-        ) {
-            Log.d("LocalElevationsSample", "CompositionLocalProvider0")
-            Text("测试", modifier = Modifier.fillMaxSize(), textAlign = TextAlign.Center)
-        }
+                    .size(115.dp)
+                    .padding(4.dp)
+    ) {
+        Log.d("LocalElevationsSample", "CompositionLocalProvider0")
+        Text("测试", modifier = Modifier.fillMaxSize(), textAlign = TextAlign.Center)
+    }
 
+    Row {
         CompositionLocalProvider(
-            LocalElevations provides Elevations(
-                cardEle.dp,
-                default = cardEle.dp
-            )
+                LocalElevations provides Elevations(
+                        cardEle.dp,
+                        default = cardEle.dp
+                )
         ) {
             Log.d("LocalElevationsSample", "CompositionLocalProvider2")
             Card(
-                backgroundColor = MaterialTheme.colors.onError,
-                elevation = LocalElevations.current.card,
-                modifier = Modifier
-                    .size(115.dp)
-                    .padding(4.dp)
+                    backgroundColor = MaterialTheme.colors.onError,
+                    elevation = LocalElevations.current.card,
+                    modifier = Modifier
+                            .size(115.dp)
+                            .padding(4.dp)
             ) {
                 Log.d("LocalElevationsSample", "CompositionLocalProvider3")
                 // Content
                 Text(
-                    "测试",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(Color.Red),
-                    textAlign = TextAlign.Center
+                        "测试",
+                        modifier = Modifier
+                                .fillMaxWidth()
+                                .background(Color.Red),
+                        textAlign = TextAlign.Center
                 )
+            }
+
+            Row(
+                    modifier = Modifier
+                            .background(Color.Green)
+                            .size(115.dp)
+                            .padding(LocalElevations.current.card)
+            ) {
+                Log.d("LocalElevationsSample", "CompositionLocalProvider3 Row")
+                // Content
+                Text("测试", modifier = Modifier.fillMaxSize(), textAlign = TextAlign.Center)
             }
 
             Button(onClick = { /*TODO*/ }) {
@@ -143,23 +154,37 @@ val LocalElevations = compositionLocalOf {
 }
 
 /*
+21:59:30.426  D  CompositionLocalProvider 0
+21:59:30.458  D  CompositionLocalProvider1
+21:59:30.458  D  LocalElevations
+21:59:30.459  D  CompositionLocalProvider0
+21:59:30.459  D  CompositionLocalProvider2
+21:59:30.459  D  CompositionLocalProvider3
+21:59:30.461  D  CompositionLocalProvider Button
+21:59:30.461  D  CompositionLocalProvider4
+21:59:30.462  D  CompositionLocalProvider5
+21:59:30.462  D  CompositionLocalProvider6
+21:59:30.462  D  CompositionLocalProvider7
+21:59:30.472  D  CompositionLocalProvider 0 SideEffect
 
-compositionLocalOf
+compositionLocalOf构建的LocalElevations：类似正常的可组合项，读取其current值的对象改变，但content不会变（对象不能是inline函数）
 在重组期间更改提供的值只会使读取其current值的内容无效
-19:12:00.270 LocalElevationsSample    D  CompositionLocalProvider2
-19:12:00.277 LocalElevationsSample    D  CompositionLocalProvider4
-19:12:00.278 LocalElevationsSample    D  CompositionLocalProvider5
-19:12:00.279 LocalElevationsSample    D  CompositionLocalProvider6
-19:12:00.279 LocalElevationsSample    D  CompositionLocalProvider7
+21:59:44.907  D  CompositionLocalProvider7
+21:59:47.252  D  CompositionLocalProvider2
+21:59:47.254  D  CompositionLocalProvider4
+21:59:47.254  D  CompositionLocalProvider5
+21:59:47.254  D  CompositionLocalProvider6
+21:59:47.255  D  CompositionLocalProvider7
 
-staticCompositionLocalOf
-与compositionLocalOf不同，Compose不会跟踪staticCompositionLocalOf的读取。更改该值会导致提供CompositionLocal的整个contentlambda被重组，而不仅仅是在组合中读取current值的位置。
+staticCompositionLocalOf构建的LocalElevations：CompositionLocalProvider作用域内所有可组合项全部重组。
+与compositionLocalOf不同，Compose不会跟踪staticCompositionLocalOf的读取。更改该值会导致提供CompositionLocal的整个content lambda被重组，而不仅仅是在组合中读取current值的位置。
 如果为CompositionLocal提供的值发生更改的可能性微乎其微或永远不会更改，使用staticCompositionLocalOf可提高性能。
-19:12:00.270 LocalElevationsSample    D  CompositionLocalProvider2
-19:12:00.273 LocalElevationsSample    D  CompositionLocalProvider3
-19:12:00.276 LocalElevationsSample    D  CompositionLocalProvider Button
-19:12:00.277 LocalElevationsSample    D  CompositionLocalProvider4
-19:12:00.278 LocalElevationsSample    D  CompositionLocalProvider5
-19:12:00.279 LocalElevationsSample    D  CompositionLocalProvider6
-19:12:00.279 LocalElevationsSample    D  CompositionLocalProvider7
-*/
+22:10:25.625  D  CompositionLocalProvider7
+22:10:26.649  D  CompositionLocalProvider2
+22:10:26.652  D  CompositionLocalProvider3
+22:10:26.660  D  CompositionLocalProvider Button
+22:10:26.662  D  CompositionLocalProvider4
+22:10:26.665  D  CompositionLocalProvider5
+22:10:26.667  D  CompositionLocalProvider6
+22:10:26.667  D  CompositionLocalProvider7
+ */
