@@ -148,7 +148,7 @@ fun LocalElevationsSample() {
 
 data class Elevations(val card: Dp = 2.dp, val default: Dp = 0.dp)
 
-val LocalElevations = compositionLocalOf {
+val LocalElevations = staticCompositionLocalOf {
     Log.d("LocalElevationsSample", "LocalElevations")
     Elevations()
 }
@@ -167,7 +167,7 @@ val LocalElevations = compositionLocalOf {
 21:59:30.462  D  CompositionLocalProvider7
 21:59:30.472  D  CompositionLocalProvider 0 SideEffect
 
-compositionLocalOf构建的LocalElevations：类似正常的可组合项，读取其current值的对象改变，但content不会变（对象不能是inline函数）
+compositionLocalOf构建的LocalElevations：类似正常的可组合项，读取其current值的对象改变，但content内智能重组
 在重组期间更改提供的值只会使读取其current值的内容无效
 21:59:44.907  D  CompositionLocalProvider7
 21:59:47.252  D  CompositionLocalProvider2
@@ -176,7 +176,7 @@ compositionLocalOf构建的LocalElevations：类似正常的可组合项，读�
 21:59:47.254  D  CompositionLocalProvider6
 21:59:47.255  D  CompositionLocalProvider7
 
-staticCompositionLocalOf构建的LocalElevations：CompositionLocalProvider作用域内所有可组合项全部重组。
+staticCompositionLocalOf构建的LocalElevations：CompositionLocalProvider作用域内所有可组合项全部重组。注意不是智能重组，是重新执行
 与compositionLocalOf不同，Compose不会跟踪staticCompositionLocalOf的读取。更改该值会导致提供CompositionLocal的整个content lambda被重组，而不仅仅是在组合中读取current值的位置。
 如果为CompositionLocal提供的值发生更改的可能性微乎其微或永远不会更改，使用staticCompositionLocalOf可提高性能。
 22:10:25.625  D  CompositionLocalProvider7

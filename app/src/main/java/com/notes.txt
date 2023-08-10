@@ -180,12 +180,14 @@
                   2.参数只被几个子级使用，而非全部子级使用
 
               创建
-                 compositionLocalOf
+                 compositionLocalOf：
                     在重组期间更改提供的值只会使读取其current值的内容无效，智能重组，没变化的跳过
+                    理解：当值改变时，类似正常的可组合项，读取其current值的对象改变，但content内智能重组
 
-                 staticCompositionLocalOf：定义提供的值不会发生更改的类型，如果值发生变化核心重组整个content lambda，没有变化的也会重组，会影响性能
+                 staticCompositionLocalOf：定义提供的值不会发生更改的类型，如果值发生变化核心重组整个content lambda，没有变化的也会重新执行，会影响性能
                     与 compositionLocalOf 不同，Compose 不会跟踪 staticCompositionLocalOf 的读取。更改该值会导致提供 CompositionLocal 的整个 content lambda 被重组，而不仅仅是在组合中读取 current 值的位置。
                     如果为 CompositionLocal 提供的值发生更改的可能性微乎其微或永远不会更改，使用 staticCompositionLocalOf 可提高性能。
+                    理解：当值改变时，CompositionLocalProvider作用域内所有可组合项全部重新执行，注意不是智能重组。
 
               常用API
                  实例对象.current  //获取当前隐式参数
@@ -210,7 +212,7 @@
               2.不要使用CompositionLocal封装ViewModel。
                   创建包含特定屏幕的 ViewModel 的 CompositionLocal，以便该屏幕中的所有可组合项都可以获取对 ViewModel 的引用来执行某些逻辑，这是一种错误做法，因为并非特定界面树下的所有可组合项都需要知道ViewModel
                   最佳做法是遵循状态向下传递而事件向上传递的模式，只向可组合项传递所需信息。这样做会使可组合项的可重用性更高，并且更易于测试。
-              3. staticCompositionLocalOf：封装可能性微乎其微或永远不会更改的类型
+              3.staticCompositionLocalOf：封装可能性微乎其微或永远不会更改的类型
               4.构建CompositionLocal元素一般以Local开头，创建后一直存在，不会随组件的移除销毁
               5.CompositionLocalProvider提供的新值，只影响当前content作用域，外部元素使用是最接近的父级
               6.第一次使用CompositionLocal元素时，构建该元素并与当前作用域绑定
@@ -230,15 +232,6 @@
 
                    2、可组合项提升
                        使用 @Composable注解函数类型，抽象层级更高，针对可组合项的封装
-
-
-
-
-
-
-
-
-
 
 
 =========================================================================================================================================
