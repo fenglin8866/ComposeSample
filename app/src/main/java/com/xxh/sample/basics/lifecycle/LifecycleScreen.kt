@@ -4,6 +4,8 @@ import android.graphics.Bitmap
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -62,11 +64,19 @@ fun MoviesScreen(movies: List<Movie>) {
             }
         }
     }
+
+    //一些可组合项提供对 key 可组合项的内置支持。
+    LazyColumn {
+        items(movies, key = { movie -> movie.id }) { movie ->
+            MovieOverview(movie)
+        }
+    }
 }
 
 @Composable
 fun MovieOverview(movie: Movie) {
     Column {
+        // 副作用将在文档后面解释。如果 MovieOverview 在获取图像的过程中进行重组，则会取消并重新启动。
         // Side effect explained later in the docs. If MovieOverview
         // recomposes, while fetching the image is in progress,
         // it is cancelled and restarted.
