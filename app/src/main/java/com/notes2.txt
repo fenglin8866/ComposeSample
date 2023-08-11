@@ -117,3 +117,120 @@
                 val hasError: Boolean
                     get() = exception != null
             }
+
+======================================================
+Compose中帧渲染:将可组合项转换为用户可见界面的过程
+    Compose通过三个不同的“阶段”来渲染帧，与Android View 系统 三个主要阶段：测量、布局和绘制类似
+    组合：要显示什么样的界面。 Compose 运行可组合函数并创建界面说明。
+
+    布局：要放置界面的位置。该阶段包含两个步骤：测量和放置。对于布局树中的每个节点，布局元素都会根据 2D 坐标来测量并放置自己及其所有子元素。
+
+    绘制：渲染的方式。将界面元素绘制到画布（通常是设备屏幕）中
+
+    这些阶段通常会以相同的顺序执行，让数据能够沿一个方向（从组合到布局，再到绘制）生成帧（也称为单向数据流）
+
+    BoxWithConstraints 以及 LazyColumn 和 LazyRow 是其子级的组合取决于父级的布局阶段。
+
+    性能保障
+       Compose 会避免在所有这些阶段中重复执行根据相同输入计算出相同结果的工作。如果可以重复使用前面计算出的结果，Compose 会跳过对应的可组合函数；如果没有必要，Compose 界面不会对整个树进行重新布局或重新绘制。
+       Compose 只会执行更新界面所需的最低限度的工作。之所以能够实现这种优化，是因为 Compose 会跟踪不同阶段中的状态读取。
+
+    状态读取
+       使用 mutableStateOf() 创建
+          直接访问 value 属性
+          使用 Kotlin 属性委托，属性委托在后台使用“getter”和“setter”函数来访问和更新状态的 value。只有当将相应属性作为值引用时，系统才会调用这些 getter 和 setter 函数（而不会在创建属性时调用），等效使用value属性。
+
+       状态读取：是指上述任一等效访问方法
+
+       当在上述任一阶段中读取快照状态值时，Compose 会自动跟踪在系统读取该值时正在执行的操作。通过这项跟踪，Compose 能够在状态值更改时重新执行读取程序；此外，我们也是以这项跟踪为基础在 Compose 中实现了对状态的观察
+
+       每个可以在读取状态发生更改时重新执行的代码块都是一个重启作用域。在不同阶段内，Compose 会跟踪状态值的更改和重启作用域。
+
+    分阶段状态读取
+        Compose 有 3 个主要阶段，并且 Compose 会跟踪在每个阶段中读取到的状态。这样一来，Compose 只需向需要对界面的每个受影响的元素执行工作的特定阶段发送通知即可。
+        创建和存储状态实例的位置与阶段几乎没有什么关系，关键在于读取状态值的时间和位置。
+     组合
+        @Composable 函数或 lambda 代码块中的状态读取会影响组合阶段，并且可能会影响后续阶段
+        当状态值发生更改时，Recomposer 会安排重新运行所有要读取相应状态值的可组合函数
+        如果输入未更改，运行时可能会决定跳过部分或全部可组合函数。
+        根据组合结果，Compose 界面会运行布局和绘制阶段。如果内容保持不变，并且大小和布局也未更改，界面可能会跳过这些阶段。
+        var padding by remember { mutableStateOf(8.dp) }
+        Text(
+        text = "Hello",
+        // The padding state is read in the composition phase
+        // when the modifier is constructed.
+        // Changes in padding will invoke recomposition.
+        modifier = Modifier.padding(padding)
+        )
+
+
+     布局
+        布局阶段包含两个步骤：测量和放置。
+        测量步骤会运行传递给 Layout 可组合项的测量 lambda、LayoutModifier 接口的 MeasureScope.measure 方法，等等。
+        放置步骤会运行 layout 函数的放置位置块、Modifier.offset { … } 的 lambda 块，等等。
+        每个步骤的状态读取都会影响布局阶段，并且可能会影响绘制阶段。
+            当状态值发生更改时，Compose 界面会安排布局阶段。如果大小或位置发生更改，界面还会运行绘制阶段。
+        测量步骤和放置步骤分别具有单独的重启作用域，这意味着，放置步骤中的状态读取不会在此之前重新调用测量步骤。不过，这两个步骤通常是交织在一起的，因此在放置步骤中读取的状态可能会影响属于测量步骤的其他重启作用域。
+        var offsetX by remember { mutableStateOf(8.dp) }
+        Text(
+        text = "Hello",
+        modifier = Modifier.offset {
+        // The offsetX state is read in the placement step
+        // of the layout phase when the offset is calculated.
+        // Changes in offsetX restart the layout.
+        IntOffset(offsetX.roundToPx(), 0)
+        }
+        )
+
+
+     绘制
+        绘制代码期间的状态读取会影响绘制阶段。常见示例包括 Canvas()、Modifier.drawBehind 和 Modifier.drawWithContent。
+        当状态值发生更改时，Compose 界面只会运行绘制阶段。
+        var color by remember { mutableStateOf(Color.Red) }
+        Canvas(modifier = modifier) {
+        // The color state is read in the drawing phase
+        // when the canvas is rendered.
+        // Changes in color restart the drawing.
+        drawRect(color)
+        }
+
+    读取优化
+       由于 Compose 会执行局部状态读取跟踪，因此我们可以在适当阶段读取每个状态，从而尽可能降低需要执行的工作量。
+       建议：尝试将状态读取定位到尽可能靠后的阶段，从而尽可能降低 Compose 需要执行的工作量。
+       通常情况下，我们绝对有必要在组合阶段读取状态。即便如此，在某些情况下，我们也可以通过过滤状态更改来尽可能减少重组次数。如需了解详情，请参阅 derivedStateOf：将一个或多个状态对象转换为其他状态。
+
+    重组循环(循环阶段依赖项)
+        系统始终按照相同的顺序来调用 Compose 的各个阶段，并且无法在同一帧中后退。不过，这并未禁止应用跨不同的帧进入组合循环。
+        问题
+           如果没有在单个帧中达到“最终”布局。该代码依赖发生多个帧，它会执行不必要的工作，并导致界面在用户屏幕上跳动。
+
+            Modifier.onSizeChanged()、onGloballyPositioned() 或一些其他布局操作
+                    更新某种状态
+                    使用该状态作为对布局修饰符（padding()、height() 或类似元素）的输入
+                    可能会重复
+
+        解决
+            一般原则是，对于应该以彼此相对的方式进行测量和放置的多个界面元素，我们要提供单一的可信来源。使用适当的布局基元或创建自定义布局意味着将最小的共享父级用作可以协调多个元素之间关系的可信来源。引入动态状态就违反了这一原则。
+
+
+        Box {
+            var imageHeightPx by remember { mutableStateOf(0) }
+
+            Image(
+                painter = painterResource(R.drawable.rectangle),
+                contentDescription = "I'm above the text",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .onSizeChanged { size ->
+                        // Don't do this
+                        imageHeightPx = size.height
+                    }
+            )
+
+            Text(
+                text = "I'm below the image",
+                modifier = Modifier.padding(
+                    top = with(LocalDensity.current) { imageHeightPx.toDp() }
+                )
+            )
+        }
