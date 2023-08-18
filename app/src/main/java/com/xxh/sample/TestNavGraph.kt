@@ -23,6 +23,7 @@ import com.xxh.sample.TestDestination.THEMING_ROUTE
 import com.xxh.sample.state.basic.ConversationScreen
 import com.xxh.sample.animation.AnimScreen
 import com.xxh.sample.basics.BasicsScreen
+import com.xxh.sample.basics.lifecycle.EffectTest
 import com.xxh.sample.component.ComponentScreen
 import com.xxh.sample.graphics.GraphicsScreen
 import com.xxh.sample.images.ImagesScreen
@@ -69,7 +70,8 @@ fun NavGraphBuilder.testGraph() {
         BasicsScreen()
     }
     composable(LIFECYCLE_ROUTE) {
-        LifecycleScreen()
+        //LifecycleScreen()
+        EffectTest()
     }
     composable(STATE_ROUTE) {
         StateScreen()

@@ -234,3 +234,194 @@ Compose中帧渲染:将可组合项转换为用户可见界面的过程
                 )
             )
         }
+
+
+===========================================================================================
+附带效应：
+
+1.执行时机
+LaunchedEffect
+SideEffect
+DisposableEffect
+
+2.应用场景
+rememberUpdateState
+
+
+3.重启效应
+================================
+1.produceState：将非 Compose 状态转换为 Compose 状态
+
+2.derivedStateOf：将一个或多个状态对象转换为其他状态
+
+3.snapshotFlow ：
+
+
+
+
+
+
+
+produceState：将非 Compose 状态转换为 Compose 状态
+produceState 会启动一个协程，该协程将作用域限定为可将值推送到返回的 State 的组合。使用此协程将非 Compose 状态转换为 Compose 状态，例如将外部订阅驱动的状态（如 Flow、LiveData 或 RxJava）引入组合。
+
+该制作工具在 produceState 进入组合时启动，在其退出组合时取消。返回的 State 冲突；设置相同的值不会触发重组。
+
+即使 produceState 创建了一个协程，它也可用于观察非挂起的数据源。如需移除对该数据源的订阅，请使用 awaitDispose 函数。
+
+以下示例展示了如何使用 produceState 从网络加载图像。loadNetworkImage 可组合函数会返回可以在其他可组合项中使用的 State。
+
+
+@Composable
+fun loadNetworkImage(
+    url: String,
+    imageRepository: ImageRepository
+): State<Result<Image>> {
+
+    // Creates a State<T> with Result.Loading as initial value
+    // If either `url` or `imageRepository` changes, the running producer
+    // will cancel and will be re-launched with the new inputs.
+    return produceState<Result<Image>>(initialValue = Result.Loading, url, imageRepository) {
+
+        // In a coroutine, can make suspend calls
+        val image = imageRepository.load(url)
+
+        // Update State with either an Error or Success result.
+        // This will trigger a recomposition where this State is read
+        value = if (image == null) {
+            Result.Error
+        } else {
+            Result.Success(image)
+        }
+    }
+}
+注意：您应采用常规 Kotlin 函数命名方式命名含返回值类型的可组合项，以小写字母开头。
+要点：produceState 在后台充分利用其他效应！它使用 remember { mutableStateOf(initialValue) } 保留 result 变量，并在 LaunchedEffect 中触发 producer 块。每当 producer 块中的 value 更新时，result 状态都会更新为新值。
+
+您可以基于现有 API 轻松创建自己的效应。
+
+============================================================
+derivedStateOf：将一个或多个状态对象转换为其他状态
+如果某个状态是从其他状态对象计算或派生得出的，请使用 derivedStateOf。使用此函数可确保仅当计算中使用的状态之一发生变化时才会进行计算。
+
+以下示例展示了基本的“待办事项”列表，其中具有用户定义的高优先级关键字的任务将首先显示：
+
+
+@Composable
+fun TodoList(highPriorityKeywords: List<String> = listOf("Review", "Unblock", "Compose")) {
+
+    val todoTasks = remember { mutableStateListOf<String>() }
+
+    // Calculate high priority tasks only when the todoTasks or highPriorityKeywords
+    // change, not on every recomposition
+    val highPriorityTasks by remember(highPriorityKeywords) {
+        derivedStateOf { todoTasks.filter { it.containsWord(highPriorityKeywords) } }
+    }
+
+    Box(Modifier.fillMaxSize()) {
+        LazyColumn {
+            items(highPriorityTasks) { /* ... */ }
+            items(todoTasks) { /* ... */ }
+        }
+        /* Rest of the UI where users can add elements to the list */
+    }
+}
+在以上代码中，derivedStateOf 保证每当 todoTasks 发生变化时，系统都会执行 highPriorityTasks 计算，并相应地更新界面。如果 highPriorityKeywords 发生变化，系统将执行 remember 代码块，并且会创建新的派生状态对象并记住该对象，以代替旧的对象。由于执行过滤以计算 highPriorityTasks 的成本很高，因此应仅在任何列表发生更改时才执行，而不是在每次重组时都执行。
+
+此外，更新 derivedStateOf 生成的状态不会导致可组合项在声明它的位置重组，Compose 仅会对返回状态为已读的可组合项（在本例中，指 LazyColumn 中的可组合项）进行重组。
+
+该代码还假设 highPriorityKeywords 的变化频率显著低于 todoTasks。否则，该代码会使用 remember(todoTasks, highPriorityKeywords) 而不是 derivedStateOf。
+
+
+============================================================
+snapshotFlow：将 Compose 的 State 转换为 Flow
+使用 snapshotFlow 将 State<T> 对象转换为冷 Flow。snapshotFlow 会在收集到块时运行该块，并发出从块中读取的 State 对象的结果。当在 snapshotFlow 块中读取的 State 对象之一发生变化时，如果新值与之前发出的值不相等，Flow 会向其收集器发出新值（此行为类似于 Flow.distinctUntilChanged 的行为）。
+
+下列示例显示了一项附带效应，是系统在用户滚动经过要分析的列表的首个项目时记录下来的：
+
+
+val listState = rememberLazyListState()
+
+LazyColumn(state = listState) {
+    // ...
+}
+
+LaunchedEffect(listState) {
+    snapshotFlow { listState.firstVisibleItemIndex }
+        .map { index -> index > 0 }
+        .distinctUntilChanged()
+        .filter { it == true }
+        .collect {
+            MyAnalyticsService.sendScrolledPastFirstItemEvent()
+        }
+}
+在上方代码中，listState.firstVisibleItemIndex 被转换为一个 Flow，从而可以受益于 Flow 运算符的强大功能。
+
+
+
+
+
+
+
+重启效应
+Compose 中有一些效应（如 LaunchedEffect、produceState 或 DisposableEffect）会采用可变数量的参数和键来取消运行效应，并使用新的键启动一个新的效应。
+
+这些 API 的典型形式是：
+
+
+EffectName(restartIfThisKeyChanges, orThisKey, orThisKey, ...) { block }
+由于此行为的细微差别，如果用于重启效应的参数不是适当的参数，可能会出现问题：
+
+如果重启效应次数不够，可能会导致应用出现错误。
+如果重启效应次数过多，效率可能不高。
+一般来说，效应代码块中使用的可变和不可变变量应作为参数添加到效应可组合项中。除此之外，您还可以添加更多参数，以便强制重启效应。如果更改变量不应导致效应重启，则应将该变量封装在 rememberUpdatedState 中。如果由于变量封装在一个不含键的 remember 中使之没有发生变化，则无需将变量作为键传递给效应。
+
+要点：应将效应中使用的变量添加为效应可组合项的参数，或使用 rememberUpdatedState。
+在上面显示的 DisposableEffect 代码中，效应将其块中使用的 lifecycleOwner 作为参数，因为对它们的任何更改都会导致效应重新开始。
+
+
+@Composable
+fun HomeScreen(
+    lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
+    onStart: () -> Unit, // Send the 'started' analytics event
+    onStop: () -> Unit // Send the 'stopped' analytics event
+) {
+    // These values never change in Composition
+    val currentOnStart by rememberUpdatedState(onStart)
+    val currentOnStop by rememberUpdatedState(onStop)
+
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            /* ... */
+        }
+
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
+}
+无需使用 currentOnStart 和 currentOnStop 作为 DisposableEffect 键，因为我们使用了 rememberUpdatedState，所以它们的值在组合中绝不会发生变化。如果您没有传递 lifecycleOwner 作为参数，并且它发生变化，那么 HomeScreen 会重组，但 DisposableEffect 不会被处理和重新开始。这会导致出现问题，因为此后会使用错误的 lifecycleOwner。
+
+使用常量作为键
+您可以使用 true 等常量作为效应键，使其遵循调用点的生命周期。它实际上具有有效的用例，如上面所示的 LaunchedEffect 示例。但在这样做之前，请审慎考虑，并确保您确实需要这么做。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
