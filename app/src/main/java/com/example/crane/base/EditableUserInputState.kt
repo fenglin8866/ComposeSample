@@ -6,6 +6,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.listSaver
+
+/**
+ * todo 5.状态容器的封装
+ */
 class EditableUserInputState(private val hint: String, initialText: String) {
 
     var text by mutableStateOf(initialText)

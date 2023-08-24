@@ -175,11 +175,9 @@ fun LandingScreen2(key: Boolean, onTimeout: () -> Unit) {
 
 @Composable
 fun LandingScreen(onTimeout: () -> Unit) {
-
     // This will always refer to the latest onTimeout function that
     // LandingScreen was recomposed with
     val currentOnTimeout by rememberUpdatedState(onTimeout)
-
     // Create an effect that matches the lifecycle of LandingScreen.
     // If LandingScreen recomposes, the delay shouldn't start again.
     LaunchedEffect(true) {
@@ -188,8 +186,6 @@ fun LandingScreen(onTimeout: () -> Unit) {
         currentOnTimeout()
     }
     Text(text = "RememberUpdatedStateTest")
-
-    /* Landing screen content */
 }
 
 
@@ -237,7 +233,6 @@ fun HomeScreen(
             lifecycleOwner.lifecycle.removeObserver(observer)
         }
     }
-
     /* Home screen content */
 }
 
@@ -253,7 +248,7 @@ fun HomeScreen(
 /*@Composable
 fun rememberAnalytics(user: User): FirebaseAnalytics {
     val analytics: FirebaseAnalytics = remember {
-         ...
+         //...
         FirebaseAnalytics(null)
     }
 
@@ -286,12 +281,10 @@ fun loadNetworkImage(
     url: String,
     imageRepository: ImageRepository
 ): State<Result<Image>> {
-
     // Creates a State<T> with Result.Loading as initial value
     // If either `url` or `imageRepository` changes, the running producer
     // will cancel and will be re-launched with the new inputs.
     return produceState<Result<Image>>(initialValue = Result.Loading, url, imageRepository) {
-
         // In a coroutine, can make suspend calls
         val image = imageRepository.load(url)
 
@@ -302,7 +295,6 @@ fun loadNetworkImage(
         } else {
             Result.Success(image)
         }
-
     }
 }
 
@@ -337,9 +329,7 @@ sealed interface Result<T> {
  */
 @Composable
 fun TodoList(highPriorityKeywords: List<String> = listOf("Review", "Unblock", "Compose")) {
-
     val todoTasks = remember { mutableStateListOf<String>() }
-
     // Calculate high priority tasks only when the todoTasks or highPriorityKeywords
     // change, not on every recomposition
     val highPriorityTasks by remember(highPriorityKeywords) {
@@ -351,7 +341,6 @@ fun TodoList(highPriorityKeywords: List<String> = listOf("Review", "Unblock", "C
             }
         }
     }
-
     Box(Modifier.fillMaxSize()) {
         LazyColumn {
             items(highPriorityTasks) { /* ... */ }
@@ -386,7 +375,6 @@ fun SnapshotFlowTest() {
 }
 
 
-
 /**
  *
  * 在上面显示的 DisposableEffect 代码中，效应将其块中使用的 lifecycleOwner 作为参数，因为对它们的任何更改都会导致效应重新开始。
@@ -416,5 +404,18 @@ fun HomeScreen2(
         }
     }
 }
+
+/*
+    作用   运行时机   是否启动协程
+
+LaunchedEffect:在可组合项作用域内运行挂起函数
+SideEffect:将Compose状态发布为非Compose代码
+DisposableEffect:需要清理的效应
+
+produceState:将非Compose状态转换为Compose状态
+derivedStateOf:将一个或多个状态转换为其他状态
+snapshotFlow:将Compose的State转换为Flow
+
+ */
 
 

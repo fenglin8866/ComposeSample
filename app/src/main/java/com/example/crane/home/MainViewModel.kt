@@ -42,6 +42,10 @@ class MainViewModel @Inject constructor(
     val restaurants: List<ExploreModel> = destinationsRepository.restaurants
 
     private val _suggestedDestinations = MutableStateFlow<List<ExploreModel>>(emptyList())
+
+    /**
+     * todo 1.添加逻辑以生成界面状态
+     */
     val suggestedDestinations: StateFlow<List<ExploreModel>>
         get() = _suggestedDestinations
 
