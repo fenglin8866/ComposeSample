@@ -59,6 +59,9 @@ object Samples : MainDestinations {
 
 val bottomScreens = listOf(Demo, Codelabs, Samples)
 
+/**
+ * 导航Host，导航图，导航的定义
+ */
 @Composable
 fun AppNavHost(
     navController: NavHostController,
@@ -74,19 +77,22 @@ fun AppNavHost(
         modifier = modifier
     ) {
         composable(Codelabs.route) {
-            ListScreenMsg(data = HomeData.conversationSample) {
+            ListScreenMsg(data = HomeData.codelabsData) {
                 clickCodelabs(it, context)
             }
         }
 
         composable(Samples.route) {
-            ListScreen(data = HomeData.conversationSample2,
+            ListScreen(data = HomeData.samplesData,
                 trans = { return@ListScreen it.title }) {
                 clickSample(it, context)
             }
         }
 
         composable(Demo.route) {
+            /*ListScreen(data = testData,trans = { return@ListScreen it }) {
+                clickDemo(it)
+            }*/
             TestMainScreen(testData, onClickAction = clickDemo)
             /* //NavHost适合跳转，不适合tab切换
              TestDemoApp(showBottomEvent)*/
@@ -112,7 +118,7 @@ fun AppNavHost(
         modifier = modifier
     ) {
         composable(Codelabs.route) {
-            ListScreenMsg(data = HomeData.conversationSample) {
+            ListScreenMsg(data = HomeData.codelabsData) {
                 var intent: Intent? = null
                 when (it) {
                     "State" -> intent = Intent(context, StateActivity::class.java)
@@ -132,7 +138,7 @@ fun AppNavHost(
         }
 
         composable(Samples.route) {
-            ListScreen(data = HomeData.conversationSample2, { return@ListScreen it.title }) {
+            ListScreen(data = HomeData.samplesData, { return@ListScreen it.title }) {
                 var intent2: Intent? = null
                 when (it) {
                     "JetSnack" -> intent2 = Intent(context, SnackActivity::class.java)

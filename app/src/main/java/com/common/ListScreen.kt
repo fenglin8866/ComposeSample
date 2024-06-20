@@ -116,7 +116,7 @@ fun ListItem(title: String, click: (String) -> Unit) {
 @Preview
 @Composable
 fun test(){
-    ListScreenMsg(data = HomeData.conversationSample) {
+    ListScreenMsg(data = HomeData.codelabsData) {
         //clickCodelabs(it, context)
     }
 }

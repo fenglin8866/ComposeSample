@@ -1,8 +1,8 @@
 package com.main.data
 
 object HomeData {
-    // Sample conversation data
-    val conversationSample = listOf(
+    //codelabs data
+    val codelabsData = listOf(
         HomeMsg(
             1,
             "Basic",
@@ -46,7 +46,7 @@ object HomeData {
         ),
     )
 
-    val conversationSample2 = listOf(
+    val samplesData = listOf(
         HomeMsg(
             1,
             "JetSnack"
@@ -75,6 +75,5 @@ object HomeData {
             8,
             "Catalog",
         ),
-
-        )
+    )
 }

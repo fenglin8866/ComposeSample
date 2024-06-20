@@ -34,6 +34,8 @@ fun rememberAppState(navController: NavHostController = rememberNavController())
 
 /**
  * 一般状态容器：界面元素状态提升 + 封装界面逻辑
+ * 1、封装列表和底部按钮点击事件
+ * 2、当前导航路径，是否显示底部状态栏
  */
 @Stable
 class AppState(val navController: NavHostController) {
@@ -43,14 +45,16 @@ class AppState(val navController: NavHostController) {
     /**
      * 当前导航路径，没有封装为状态，不会触发重组
      */
-     val currentRoute: String?
+    val currentRoute: String?
         get() = navController.currentDestination?.route
 
     private val currentRouteAsState
-        @Composable get() = navController.currentBackStackEntryAsState().value?.destination?.route
+        @Composable
+        get() = navController.currentBackStackEntryAsState().value?.destination?.route
 
     val isShowBottomBar
-        @Composable get() = currentRouteAsState in bottomRoute
+        @Composable
+        get() = currentRouteAsState in bottomRoute
 
     fun navigateToBottomBarRoute(route: String) {
         if (route != currentRoute) {

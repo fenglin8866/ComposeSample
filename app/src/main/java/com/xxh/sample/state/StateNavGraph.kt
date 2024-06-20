@@ -35,6 +35,7 @@ fun StateNavGraph(navController: NavHostController) {
             }
         }
         composable(DEV_ROUTE) {
+            Log.i("xxh714", "DEV_ROUTE = $it")
             StateBasicScreen()
         }
         composable(CODELAB_ROUTE) {
