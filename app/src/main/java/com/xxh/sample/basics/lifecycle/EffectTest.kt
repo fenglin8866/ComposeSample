@@ -184,6 +184,7 @@ fun LandingScreen(onTimeout: () -> Unit) {
         Log.d("xxh", "start")
         delay(5000)
         currentOnTimeout()
+//        onTimeout()
     }
     Text(text = "RememberUpdatedStateTest")
 }
@@ -231,6 +232,16 @@ fun HomeScreen(
         // When the effect leaves the Composition, remove the observer
         onDispose {
             lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
+
+    SideEffect {
+
+    }
+
+    DisposableEffect(key1 = lifecycleOwner) {
+        onDispose {
+
         }
     }
     /* Home screen content */

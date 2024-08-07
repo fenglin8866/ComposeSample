@@ -22,12 +22,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.common.test
 import com.xxh.sample.common.component.XInput
 
 @Composable
 fun LifecycleScreen() {
     Column {
-        HelloContent10()
+        //HelloContent10()
         /* HelloContent11()
          HelloContent12()
 
@@ -53,8 +54,51 @@ fun LifecycleScreen() {
                  Log.d("LifecycleScreen", "LifecycleScreen DisposableEffect onDispose")
              }
          }*/
+        TestEffect()
     }
 }
+
+
+@Composable
+fun TestEffect() {
+    var isVisible by remember {
+        mutableStateOf(true)
+    }
+    Row {
+        if(isVisible){
+            Column {
+                var name by remember {
+                    mutableStateOf("xxh")
+                }
+                Text(text = name)
+                Button(onClick = {
+                    name="xtq"
+                }) {
+                    Text(text = "按钮1")
+                }
+                SideEffect {
+                    Log.d("TestEffect", " SideEffect")
+                }
+            }
+        }
+
+        Column {
+            Text(text = "A")
+            Button(onClick = {
+                isVisible=false
+            }) {
+                Text(text = "按钮2")
+                SideEffect {
+                    Log.d("TestEffect", " SideEffect2")
+                }
+            }
+
+        }
+    }
+
+
+}
+
 
 
 @Composable

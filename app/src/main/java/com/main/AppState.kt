@@ -2,9 +2,11 @@ package com.main
 
 import android.content.Context
 import android.content.Intent
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.catalog.CatalogActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavHostController
